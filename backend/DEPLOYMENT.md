@@ -23,5 +23,5 @@ All ten photo URLs returned HTTP 200 with image/jpeg on 2026-11-11.
 Graphical local browser QA could not establish a connection before the Windows environment disconnected. Visual QA remains limited.
 
 ## Hosting and rollback
-The GitHub repository and Sites audience remain private. Access for other travelers needs a separate outer Sites sharing decision.
+GitHub Pages is the user's requested hosting target. `.github/workflows/pages.yml` uploads only dist and uses the existing GitHub-origin allowance in the login function. Pages must first be enabled in repository Settings with GitHub Actions as source. The repository remains private until explicitly changed; private-repo Pages requires an eligible GitHub plan. The former Sites audience was made public by request, but no further Sites deployment is performed for this migration.
 Rollback: deploy the previous static version. Preserve new tables to keep any submitted ideas. Never automatically drop data or remove Auth users.

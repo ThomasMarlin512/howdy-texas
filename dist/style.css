@@ -9,3 +9,6 @@
 @media(max-width:800px){.view-nav{gap:4%;padding:0 5%}.view-nav a{font-size:11px}.idea-photo{height:280px}.photo-caption{left:20px;right:20px}.photo-caption h3{font-size:28px}.photo-motif{left:20px}.idea-body{padding:20px}.toolbar .button{padding:12px 18px}.feature h3{margin-top:65px}}
 @media(max-width:550px){.view-nav{gap:22px;padding:0 16px;justify-content:flex-start}.view-nav a{font-size:11px;flex-shrink:0}.hero{min-height:580px}.catalog-tools{align-items:stretch;flex-direction:column;gap:6px}.catalog-tools .quiet{align-self:flex-start;padding-left:0}.idea-photo{height:300px}.photo-caption h3{font-size:31px}.idea-actions{gap:8px}.form-pair{grid-template-columns:1fr}.idea-body{padding:20px}.toolbar .button{width:100%;justify-content:center}.vote-summary{align-items:flex-start}.detail-photo{height:230px}.feature h3{margin-top:45px}}
 @media print{.idea-card{break-inside:avoid;margin-bottom:20px}.idea-photo{height:220px;print-color-adjust:exact}.idea-actions,.owner-actions,.catalog-tools{display:none!important}.idea-card .idea-body>p{min-height:0}}
+
+/* Six navigation destinations remain usable on narrow tablets. */
+.view-nav{overflow-x:auto}.view-nav a{flex-shrink:0}
