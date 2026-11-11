@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {cleanState,validDate,totalBudget,escapeHTML,nextRevision,maps} from '../dist/core.js';
+import {DAYS} from '../dist/data.js';
+test('invalid dates do not silently roll into another month',()=>{assert.equal(validDate('2027-02-29'),false);assert.equal(validDate('2028-02-29'),true);assert.equal(validDate('2026-13-01'),false);});
+test('untrusted shared plan is normalized without accepting strings as checkboxes or money',()=>{const p=cleanState({start:'yesterday',note:'a'.repeat(6000),tasks:{date:'true'},budget:{car:Infinity,flight:-1,food:'40',fun:0}});assert.equal(p.start,'');assert.equal(p.note.length,5000);assert.equal(p.tasks.date,false);assert.equal(p.budget.car,null);assert.equal(p.budget.flight,null);assert.equal(p.budget.food,null);assert.equal(p.budget.fun,0);});
+test('budget distinguishes per-person, daily, and total expenses',()=>{assert.equal(totalBudget({flight:1000,stay:1800,car:1200,road:400,food:60,fun:200,extra:800}),11400);});
+test('rendered member and note values cannot inject markup',()=>{assert.equal(escapeHTML('<img onerror="x">'), '&lt;img onerror=&quot;x&quot;&gt;');});
+test('revision guard rejects missing, corrupt or overflowing revisions',()=>{assert.equal(nextRevision(5),6);for(const v of [null,-1,1.5,2147483647])assert.throws(()=>nextRevision(v));});
+test('all 10 days preserve useful destinations and safe external links',()=>{assert.deepEqual(DAYS.map(d=>d.day),[1,2,3,4,5,6,7,8,9,10]);for(const d of DAYS){assert.ok(d.schedule.length>=3);assert.equal(new URL(d.source).protocol,'https:');assert.equal(new URL(maps(d)).hostname,'www.google.com');assert.ok(!JSON.stringify(d).includes('\ufffd'));}});

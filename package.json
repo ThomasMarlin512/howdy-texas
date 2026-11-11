@@ -1,0 +1,1 @@
+{"name":"howdy-texas","private":true,"version":"2.0.0","type":"module","scripts":{"test":"node --test tests/*.test.mjs","check":"node --check dist/app.js && node --check backend/functions/howdy-code-login/login-core.mjs"}}
