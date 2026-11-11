@@ -1,24 +1,28 @@
 # Howdy Texas
 
-Eigenständige Roadtrip-Website mit Western-Gestaltung und zehn Tageskarten.
-
-## Anmeldung
-Vorname ohne Beachtung der Groß-/Kleinschreibung und das vereinbarte Gruppenpasswort. Die Passwortschreibweise zählt genau. Vier unabhängige Texas-Zugänge; Passwort und persönliche Kontodaten sind nicht im Quellcode.
+Eigenständige Roadtrip-Website mit Reiseideen, Hotelvorschlägen und gemeinsamem Plan.
 
 ## Funktionen
-Gemeinsamer Reisezeitraum, Budget, Aufgaben, Notizen und persönliche Favoriten. Speicherung erfolgt für die angemeldete Reisegruppe in Supabase. Gleichzeitige Änderungen werden über Revisionen geprüft.
+- Neun Reiseziele als unverbindliche Vorschläge, ohne feste Tagesreihenfolge.
+- Neun Hotelideen mit Links zu den offiziellen Hotelseiten. Keine Preise oder Verfügbarkeit zugesagt.
+- Ortsfotos als Kartenhintergrund; Hotels zeigen ausdrücklich Stadtmotive. Bildnachweise im Footer.
+- Angemeldete Crewmitglieder können Reiseziele und Hotels vorschlagen, eigene Einträge bearbeiten, zurückziehen und wieder aufnehmen.
+- Persönliche Favoriten, gemeinsame Favoritenübersicht, Regionfilter und Suche.
+- Einstellbare Reisedauer, gemeinsames Budget, Termin, Aufgaben und Notizen.
+
+## Anmeldung
+Vorname ohne Beachtung der Groß-/Kleinschreibung und das vereinbarte Gruppenpasswort. Die Passwortschreibweise zählt genau. Vier unabhängige Texas-Zugänge; Passwort und Hashes stehen nicht im Quellcode. Eine Anmeldung mit dem Gruppenpasswort ist keine unabhängige Identitätsprüfung.
 
 ## Entwicklung
-Node 22+, keine Build-Abhängigkeiten.
-`npm test` und `npm run check`.
-Vorschau: `python -m http.server 4178 --directory dist --bind 127.0.0.1`.
-[Einrichtung und geprüfte Zugriffsbeschränkungen](backend/DEPLOYMENT.md).
+Node 22+, keine Build-Abhängigkeiten. `npm test` und `npm run check`.
+Die statischen Dateien liegen in `dist/`. [Backend und Tests](backend/DEPLOYMENT.md).
+
+## Speicherung
+Supabase RLS prüft die bestätigte Gruppenmitgliedschaft bei jedem Datenzugriff. Einträge sind für die Gruppe lesbar und nur vom jeweiligen Mitglied änderbar. Revisionen verhindern das Überschreiben inzwischen geänderter Vorschläge und Pläne. Neue Ideen erscheinen nach Anmeldung oder „Vorschläge aktualisieren“ auf anderen Geräten.
 
 ## Hosting
-Das eigene Repository und die bestehende Sites-Veröffentlichung sind weiterhin privat. Die Freigabe eines öffentlichen Hostings ist noch offen.
+Das GitHub-Repository und die bestehende Sites-Veröffentlichung sind privat. Die äußere Sites-Freigabe ist getrennt vom Gruppenlogin; für weitere Reisende muss der Site-Zugang noch freigegeben werden.
 
-## Inhalte
-Routenvorschlag Nashville → San Antonio, ohne feste Termine oder bestätigte Buchungen.
-Titelbild: [Ryan Hefner / Unsplash](https://unsplash.com/photos/RW4uu6dJCpY), [Unsplash License](https://unsplash.com/license). Stimmungsbild aus West Texas, kein Routenstopp.
+## Quellen
+Hotelangaben: offizielle Links pro Karte, geprüft am 11.11.2026. Bildquellen, Urheber und Lizenzen stehen in `dist/data.js` und im Footer. Fotos werden in der Darstellung beschnitten und abgedunkelt. Keine externen Bilder sind als eigene Werke ausgegeben.
 Supabase JS ist auf 2.57.4 festgelegt.
-

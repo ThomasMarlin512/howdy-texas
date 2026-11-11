@@ -1,15 +1,329 @@
-'use strict';
-export const DAYS = [
- {day:1,region:'Tennessee',city:'Nashville',subtitle:'Ankommen in Music City',drive:'Anreise',distance:'je nach Flug',sleep:'Nashville',text:'In Ruhe ankommen, einchecken und einen ersten Eindruck vom Broadway sammeln. Der Jetlag darf mitreden.',schedule:[['Ankunft','Flug, Einreise, Gepäck und Transfer. Genügend Zeit lassen; das Programm hängt von der Ankunftszeit ab.'],['Nach dem Check-in','Ein kurzer Spaziergang und das erste gemeinsame Essen. Hot Chicken ist eine Idee.'],['Wenn noch Energie da ist','Lower Broadway und Live-Musik. Heute nichts Zeitkritisches fest buchen.']],tip:'Das ist Tag 1 vor Ort. Je nach Flugverbindung kann ein zusätzlicher Anreisetag nötig sein.',map:'Nashville Tennessee',source:'https://www.visitmusiccity.com/',sourceLabel:'Visit Music City'},
- {day:2,region:'Tennessee',city:'Nashville',subtitle:'Country-Musik & Honky-Tonks',drive:'Stadttag',distance:'kurze Wege',sleep:'Nashville',text:'Country Music Hall of Fame, Centennial Park und am Abend eine Show – oder einfach gute Live-Musik.',schedule:[['Vormittag','Country Music Hall of Fame and Museum als gemeinsames Highlight.'],['Nachmittag','Centennial Park oder Zeit für einen gemütlichen Stadtbummel. Nicht zu viel hineinpacken.'],['Abend','Grand Ole Opry oder Ryman Auditorium, wenn ein passender Termin verfügbar ist. Alternativ Honky-Tonks am Broadway.']],tip:'Eintrittskarten und Showtermine erst zum tatsächlichen Reisedatum auswählen.',map:'Country Music Hall of Fame Nashville',source:'https://www.opry.com/',sourceLabel:'Grand Ole Opry · Programm'},
- {day:3,region:'Tennessee',city:'Nashville → Memphis',subtitle:'Von Country zu Blues',drive:'ca. 3–3½ Std.',distance:'ca. 340 km',sleep:'Memphis',origin:'Nashville TN',destination:'Memphis TN',text:'Nach der Fahrt bleibt Zeit für ein großes Highlight: Graceland oder Sun Studio. Am Abend wartet die Beale Street.',schedule:[['Vormittag','Fahrt von Nashville nach Memphis, mit Kaffeepause unterwegs.'],['Nachmittag','Graceland ODER Sun Studio auswählen. Für einen entspannten Besuch reicht der Anreisetag nicht für alles.'],['Abend','Einchecken, essen und Blues auf der Beale Street erleben.']],tip:'Wenn Graceland Priorität hat, früh losfahren und den Besuch ausreichend lang einplanen. Alle drei Ziele am Anreisetag wären sehr gedrängt.',source:'https://www.graceland.com/',sourceLabel:'Graceland · Besuch planen'},
- {day:4,region:'Arkansas',city:'Memphis → Hot Springs',subtitle:'Ein Tag zum Durchatmen',drive:'ca. 3–3½ Std.',distance:'ca. 310 km',sleep:'Hot Springs',origin:'Memphis TN',destination:'Hot Springs AR',text:'Über den Mississippi nach Arkansas. Bathhouse Row erkunden und bei Interesse einen Badehausbesuch einplanen.',schedule:[['Vormittag','Weiterfahrt nach Arkansas. Mittagspause unterwegs oder nach der Ankunft.'],['Nachmittag','Spaziergang entlang der historischen Bathhouse Row und durch die Umgebung.'],['Optional','Thermalbaden im Buckstaff oder Quapaw Bathhouse. Öffnungszeiten und freie Plätze prüfen.']],tip:'Im Nationalpark gibt es keine Freiluft-Bademöglichkeit in den Thermalquellen. Gebadet wird in den Badehäusern.',source:'https://www.nps.gov/hosp/planyourvisit/thermal-springs.htm',sourceLabel:'NPS · Thermalbäder'},
- {day:5,region:'Texas',city:'Hot Springs → Dallas',subtitle:'Willkommen im Lone Star State',drive:'ca. 4½–5 Std.',distance:'ca. 470 km',sleep:'Dallas / Fort Worth',origin:'Hot Springs AR',destination:'Dallas TX',text:'Die längste Etappe der Reise. Nach der Ankunft entspannt einchecken, Dallas entdecken und gemeinsam BBQ essen.',schedule:[['Vormittag','Frühstück und Fahrt nach Texas. Regelmäßige Pausen einplanen.'],['Nachmittag','Hotelbezug. Dealey Plaza als kurzer Spaziergang; das Sixth Floor Museum nur bei passender Ankunftszeit und freiem Zeitfenster.'],['Abend','Texas-Barbecue und ein ruhiger Ausklang nach der langen Fahrt.']],tip:'Ein verbindliches Museumsticket kurz nach der geplanten Ankunft wäre riskant. Fahrt, Pausen und Verkehr kommen zuerst.',source:'https://www.jfk.org/',sourceLabel:'Sixth Floor Museum'},
- {day:6,region:'Texas',city:'Dallas & Fort Worth',subtitle:'Ein ganzer Tag Cowboy-Flair',drive:'je Weg ca. 45–60 Min.',distance:'ca. 110–130 km hin & zurück',sleep:'Dallas / Fort Worth',origin:'Dallas TX',destination:'Fort Worth Stockyards TX',text:'Stockyards, Longhorns, Westernläden und Country-Musik. Heute bleibt genügend Zeit für Fort Worth.',schedule:[['Vormittag','Zu den Fort Worth Stockyards fahren und den historischen Bezirk erkunden.'],['Viehtrieb','Normalerweise 11:30 oder 16:00 Uhr; rechtzeitig vorher da sein und den Tagesstatus prüfen.'],['Nachmittag & Abend','Zeit für Läden, Essen und optional Live-Musik. Ein Rodeo nur einplanen, wenn es am Reisetag stattfindet.']],tip:'Der Viehtrieb kann ausfallen, etwa an bestimmten Feiertagen oder wegen Wetter und örtlicher Änderungen. Eine Unterkunft in Fort Worth kann den Rückweg verkürzen.',source:'https://www.fortworth.com/the-herd/',sourceLabel:'Fort Worth · The Herd'},
- {day:7,region:'Texas',city:'Dallas → Waco → Austin',subtitle:'Ein Zwischenstopp, der sich lohnt',drive:'ca. 3½–4 Std. reine Fahrt',distance:'ca. 320 km',sleep:'Austin',origin:'Dallas TX',destination:'Austin TX',waypoints:'Waco TX',text:'Über Waco nach Austin. Magnolia ist eine mögliche Pause, später geht’s über die South Congress Avenue.',schedule:[['Vormittag','Dallas verlassen und nach Waco fahren.'],['Mittag','Optional Magnolia Market at the Silos besuchen. Alternativ einfach eine entspannte Mittagspause in Waco.'],['Später Nachmittag','Weiterfahrt nach Austin, Hotelbezug und ein erster Spaziergang an der South Congress Avenue.']],tip:'Magnolia ist regulär sonntags geschlossen. Den Zwischenstopp nach Festlegung der Reisetage entsprechend verschieben oder auslassen.',source:'https://magnolia.com/pages/visit',sourceLabel:'Magnolia · Besuch & Öffnungszeiten'},
- {day:8,region:'Texas',city:'Austin',subtitle:'Foodtrucks & Live-Musik',drive:'Stadttag',distance:'kurze Wege',sleep:'Austin',text:'Capitol, ein entspannter Nachmittag und am Abend Musik. Austin bekommt bewusst einen vollen Tag.',schedule:[['Vormittag','Texas State Capitol besichtigen oder auf eigene Faust die Stadt entdecken.'],['Nachmittag','Barton Springs Pool bei passendem Wetter und geöffnetem Badebetrieb; alternativ Stadtbummel und Pause.'],['Abend','Foodtrucks und eine Live-Musik-Location nach unserem Geschmack auswählen.']],tip:'Badezeiten, Veranstaltungen und mögliche Schließtage zum Reisedatum prüfen. Der Nachmittag darf auch einfach frei bleiben.',map:'Austin Texas',source:'https://www.austintexas.org/',sourceLabel:'Visit Austin'},
- {day:9,region:'Texas',city:'Austin → Hill Country',subtitle:'Fredericksburg & Luckenbach',drive:'ca. 2–2½ Std. mit Abstecher',distance:'ca. 160 km',sleep:'Fredericksburg / Umgebung',origin:'Austin TX',destination:'Fredericksburg TX',waypoints:'Luckenbach TX',text:'Kleine Orte, Landstraßen und Country-Flair. Fredericksburg und Luckenbach bilden den ruhigen Kontrast zu den Städten.',schedule:[['Vormittag','Fahrt ins Hill Country. Reihenfolge der Stopps nach Wetter und Veranstaltungskalender wählen.'],['Nachmittag','Fredericksburg mit Main Street und kleinen Läden; Luckenbach als Country-Abstecher.'],['Abend','In der Gegend übernachten und den letzten ganzen Urlaubstag gemütlich ausklingen lassen.']],tip:'Live-Musik in Luckenbach ist terminabhängig. Falls Weinproben gewünscht sind, vorher die Fahrfrage klären.',source:'https://www.visitfredericksburgtx.com/',sourceLabel:'Fredericksburg · Reiseinfos'},
- {day:10,region:'Texas',city:'Hill Country → San Antonio',subtitle:'River Walk & Abschied',drive:'ca. 1½–2 Std.',distance:'ca. 115 km',sleep:'Rückreise oder Zusatznacht',origin:'Fredericksburg TX',destination:'San Antonio TX',text:'San Antonio bildet den Abschluss. Alamo und River Walk nur dann, wenn der Rückflug ausreichend Zeit lässt.',schedule:[['Vormittag','Von Fredericksburg nach San Antonio fahren.'],['Wenn die Flugzeit passt','River Walk und optional Alamo Church. Für den kostenlosen Kirchenbesuch ein Zeitfenster reservieren.'],['Rückreise','Mietwagenrückgabe und Flughafenpuffer nach Vorgabe von Vermieter und Airline einplanen. Bei frühem Abflug braucht es eine Zusatznacht oder eine angepasste Route.']],tip:'Ein kompletter Besichtigungstag plus internationaler Rückflug ist nicht automatisch realistisch. Rückflugzeit und Mietwagenrückgabe zuerst festlegen.',source:'https://www.thealamo.org/visit',sourceLabel:'The Alamo · Reservierung'}
+export const PHOTOS={
+  "nashville": {
+    "label": "Nashville · Broadway",
+    "url": "https://images.unsplash.com/photo-1588897159261-328f3f53715f?auto=format&fit=crop&w=1200&q=80",
+    "author": "Chad Morehead",
+    "source": "https://unsplash.com/photos/AHnmupFDWCc",
+    "license": "Unsplash",
+    "licenseUrl": "https://unsplash.com/license"
+  },
+  "memphis": {
+    "label": "Memphis · Beale Street",
+    "url": "https://images.unsplash.com/photo-1543372742-e08542e25f8b?auto=format&fit=crop&w=1200&q=80",
+    "author": "Pretty Pink",
+    "source": "https://unsplash.com/photos/0rno_BuGoq8",
+    "license": "Unsplash",
+    "licenseUrl": "https://unsplash.com/license"
+  },
+  "hotsprings": {
+    "label": "Hot Springs · Bathhouse Row",
+    "url": "https://npgallery.nps.gov/GetAsset/0FB07FCF-9CBB-A311-502B3FEE8CB2B71C/original.jpg",
+    "author": "National Park Service (2010)",
+    "source": "https://npgallery.nps.gov/AssetDetail/0fb07fcf-9cbb-a311-502b-3fee8cb2b71c",
+    "license": "Public Domain",
+    "licenseUrl": "https://npgallery.nps.gov/AssetDetail/0fb07fcf-9cbb-a311-502b-3fee8cb2b71c"
+  },
+  "dallas": {
+    "label": "Dallas · Skyline",
+    "url": "https://images.unsplash.com/photo-1625950019503-cae6a7825762?auto=format&fit=crop&w=1200&q=80",
+    "author": "Max Fray",
+    "source": "https://unsplash.com/photos/V6CQgi7Pgdc",
+    "license": "Unsplash",
+    "licenseUrl": "https://unsplash.com/license"
+  },
+  "fortworth": {
+    "label": "Fort Worth · Stockyards",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Fort_Worth_Stockyards_June_2016_14_%28Exchange_Avenue%29.jpg/1280px-Fort_Worth_Stockyards_June_2016_14_%28Exchange_Avenue%29.jpg",
+    "author": "Michael Barera",
+    "source": "https://commons.wikimedia.org/wiki/File:Fort_Worth_Stockyards_June_2016_14_(Exchange_Avenue).jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+  },
+  "waco": {
+    "label": "Waco · Suspension Bridge",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Waco_Suspension_Bridge.jpg/1280px-Waco_Suspension_Bridge.jpg",
+    "author": "Sjgphotography2018",
+    "source": "https://commons.wikimedia.org/wiki/File:Waco_Suspension_Bridge.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+  },
+  "austin": {
+    "label": "Austin · Skyline",
+    "url": "https://images.unsplash.com/photo-1666969565832-b55bf42a900d?auto=format&fit=crop&w=1200&q=80",
+    "author": "Justin Wallace",
+    "source": "https://unsplash.com/photos/cB_LQ6NGkq4",
+    "license": "Unsplash",
+    "licenseUrl": "https://unsplash.com/license"
+  },
+  "hillcountry": {
+    "label": "Fredericksburg · Main Street",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/Main_Street_at_Fredericksburg.JPG/1280px-Main_Street_at_Fredericksburg.JPG",
+    "author": "Lombana",
+    "source": "https://commons.wikimedia.org/wiki/File:Main_Street_at_Fredericksburg.JPG",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+  },
+  "sanantonio": {
+    "label": "San Antonio · River Walk",
+    "url": "https://images.unsplash.com/photo-1692193483739-0e378f2eec45?auto=format&fit=crop&w=1200&q=80",
+    "author": "Stephen Crane",
+    "source": "https://unsplash.com/photos/XwmqeX7Vsso",
+    "license": "Unsplash",
+    "licenseUrl": "https://unsplash.com/license"
+  },
+  "roadtrip": {
+    "label": "West Texas · Roadtrip-Stimmungsbild",
+    "url": "https://images.unsplash.com/photo-1484501085877-500786457c48?auto=format&fit=crop&w=1200&q=80",
+    "author": "Ryan Hefner",
+    "source": "https://unsplash.com/photos/RW4uu6dJCpY",
+    "license": "Unsplash",
+    "licenseUrl": "https://unsplash.com/license"
+  }
+};
+export const IDEAS=[
+  {
+    "id": "destination-nashville",
+    "kind": "destination",
+    "title": "Nashville",
+    "location": "Nashville",
+    "region": "Tennessee",
+    "description": "Live-Musik am Broadway, die Country Music Hall of Fame oder eine Show im Ryman. Nashville ist eine Idee für alle, die den Trip mit Musik verbinden möchten.",
+    "tagline": "Country-Musik, Broadway & Honky-Tonks",
+    "url": "https://www.visitmusiccity.com/",
+    "photo_key": "nashville",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "destination-memphis",
+    "kind": "destination",
+    "title": "Memphis",
+    "location": "Memphis",
+    "region": "Tennessee",
+    "description": "Beale Street am Abend, Sun Studio oder Graceland: Gemeinsam auswählen, was uns interessiert. Die Highlights brauchen Zeit; ein zusätzlicher Aufenthalt ist eine Option.",
+    "tagline": "Blues, Beale Street & Musikgeschichte",
+    "url": "https://www.memphistravel.com/",
+    "photo_key": "memphis",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "destination-hotsprings",
+    "kind": "destination",
+    "title": "Hot Springs",
+    "location": "Hot Springs",
+    "region": "Arkansas",
+    "description": "Bathhouse Row und ein Spaziergang durch den Nationalpark. Ein Thermalbad im Badehaus könnte die entspannte Pause zwischen den Musikstädten und Texas sein.",
+    "tagline": "Badehäuser & eine ruhige Pause",
+    "url": "https://www.nps.gov/hosp/index.htm",
+    "photo_key": "hotsprings",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "destination-dallas",
+    "kind": "destination",
+    "title": "Dallas",
+    "location": "Dallas",
+    "region": "Texas",
+    "description": "Downtown entdecken, gemeinsam essen oder das Sixth Floor Museum besuchen. Dallas kann ein eigener Aufenthalt oder ein Ausgangspunkt für die Umgebung werden.",
+    "tagline": "Skyline, Stadtleben & Texas-BBQ",
+    "url": "https://www.visitdallas.com/",
+    "photo_key": "dallas",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "destination-fortworth",
+    "kind": "destination",
+    "title": "Fort Worth",
+    "location": "Fort Worth",
+    "region": "Texas",
+    "description": "Westernläden, historische Stockyards und Country-Musik. Viehtrieb, Konzert oder Rodeo nach dem tatsächlichen Reisetermin auswählen.",
+    "tagline": "Stockyards & Cowboy-Flair",
+    "url": "https://www.fortworth.com/",
+    "photo_key": "fortworth",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "destination-waco",
+    "kind": "destination",
+    "title": "Waco",
+    "location": "Waco",
+    "region": "Texas",
+    "description": "Magnolia Market oder ein Spaziergang an der Suspension Bridge. Waco kann ein kurzer Stopp oder eine Übernachtung werden. Öffnungstage vorher prüfen.",
+    "tagline": "Silos, Flusspromenade & Zwischenstopp",
+    "url": "https://www.destinationwaco.org/",
+    "photo_key": "waco",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "destination-austin",
+    "kind": "destination",
+    "title": "Austin",
+    "location": "Austin",
+    "region": "Texas",
+    "description": "South Congress, Texas State Capitol und abends Musik. Bei passendem Wetter wäre Barton Springs eine zusätzliche Idee. Genug freie Zeit lassen.",
+    "tagline": "Foodtrucks, Capitol & Live-Musik",
+    "url": "https://www.austintexas.org/",
+    "photo_key": "austin",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "destination-hillcountry",
+    "kind": "destination",
+    "title": "Fredericksburg & Luckenbach",
+    "location": "Fredericksburg & Luckenbach",
+    "region": "Texas",
+    "description": "Main Street in Fredericksburg, Landstraßen und ein Country-Abstecher nach Luckenbach. Musiktermine prüfen; die Aufenthaltsdauer bleibt offen.",
+    "tagline": "Kleine Orte & Hill Country",
+    "url": "https://www.visitfredericksburgtx.com/",
+    "photo_key": "hillcountry",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "destination-sanantonio",
+    "kind": "destination",
+    "title": "San Antonio",
+    "location": "San Antonio",
+    "region": "Texas",
+    "description": "Am River Walk spazieren, die Alamo besuchen oder einfach die Stadt genießen. San Antonio ist ein mögliches Reiseziel, kein bereits festgelegter Rückflugort.",
+    "tagline": "River Walk, Alamo & Tex-Mex",
+    "url": "https://www.visitsanantonio.com/",
+    "photo_key": "sanantonio",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "hotel-nashville",
+    "kind": "hotel",
+    "title": "Drury Plaza Hotel Nashville Downtown",
+    "location": "Nashville",
+    "region": "Tennessee",
+    "description": "Downtown als Ausgangspunkt für Broadway und Musikmuseen. Frühstück und ein Pool gehören zum Angebot. Parkkosten und Zimmeraufteilung vor der Buchung prüfen.",
+    "url": "https://www.druryhotels.com/locations/nashville-tn/drury-plaza-hotel-nashville-downtown",
+    "photo_key": "nashville",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "hotel-memphis",
+    "kind": "hotel",
+    "title": "The Peabody Memphis",
+    "location": "Memphis",
+    "region": "Tennessee",
+    "description": "Historisches Hotel in Downtown für einen besonderen Aufenthalt in Memphis. Eine eher gehobene Hotelidee; Gesamtpreis inklusive Zusatzgebühren vergleichen.",
+    "url": "https://peabodymemphis.com/",
+    "photo_key": "memphis",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "hotel-hotsprings",
+    "kind": "hotel",
+    "title": "The Waters Hot Springs",
+    "location": "Hot Springs",
+    "region": "Arkansas",
+    "description": "Tapestry Collection by Hilton: direkt gegenüber der Bathhouse Row. Eine Idee für kurze Wege zu den Badehäusern; mit Restaurant und Rooftop-Bar.",
+    "url": "https://www.hilton.com/en/hotels/hottsup-the-waters-hot-springs/",
+    "photo_key": "hotsprings",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "hotel-dallas",
+    "kind": "hotel",
+    "title": "Hampton Inn & Suites Dallas Downtown",
+    "location": "Dallas",
+    "region": "Texas",
+    "description": "Zentrale Unterkunft an der Commerce Street mit Frühstück und Innenpool. Als Basis für einen Stadtaufenthalt in Dallas vormerken.",
+    "url": "https://www.hilton.com/en/hotels/daldxhx-hampton-suites-dallas-downtown/",
+    "photo_key": "dallas",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "hotel-fortworth",
+    "kind": "hotel",
+    "title": "Hyatt Place Fort Worth Historic Stockyards",
+    "location": "Fort Worth",
+    "region": "Texas",
+    "description": "Übernachten direkt im Stockyards-Viertel: interessant, wenn wir den Abend dort verbringen möchten. Mit Außenpool; Zimmer und Parkbedingungen prüfen.",
+    "url": "https://www.hyatt.com/hyatt-place/en-US/dfwzf-hyatt-place-fort-worth-historic-stockyards",
+    "photo_key": "fortworth",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "hotel-waco",
+    "kind": "hotel",
+    "title": "Hotel Indigo Waco – Baylor",
+    "location": "Waco",
+    "region": "Texas",
+    "description": "Im Warehouse District in Downtown, nahe Magnolia. Eine Hotelidee, falls Waco mehr als ein kurzer Zwischenstopp werden soll.",
+    "url": "https://www.ihg.com/hotelindigo/hotels/us/en/waco/actin/hoteldetail",
+    "photo_key": "waco",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "hotel-austin",
+    "kind": "hotel",
+    "title": "Hyatt Place Austin Downtown",
+    "location": "Austin",
+    "region": "Texas",
+    "description": "Zentrale Basis an der East 3rd Street für Austins Innenstadt und Musikangebote. Frühstück im Angebot; Parkkosten gesondert prüfen.",
+    "url": "https://www.hyatt.com/hyatt-place/en-US/auszd-hyatt-place-austin-downtown",
+    "photo_key": "austin",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "hotel-hillcountry",
+    "kind": "hotel",
+    "title": "Fredericksburg Inn & Suites",
+    "location": "Fredericksburg",
+    "region": "Texas",
+    "description": "Nur einen Block von der Main Street entfernt. Frühstück, Parkplätze und Außenbereich machen das Hotel zu einer Idee für unsere Hill-Country-Pause.",
+    "url": "https://www.fredericksburg-inn.com/",
+    "photo_key": "hillcountry",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  },
+  {
+    "id": "hotel-sanantonio",
+    "kind": "hotel",
+    "title": "Drury Plaza Hotel San Antonio Riverwalk",
+    "location": "San Antonio",
+    "region": "Texas",
+    "description": "Hotel am River Walk im ehemaligen Alamo-National-Bank-Gebäude. Mit Frühstück und Dachpool; eine Idee für einen Aufenthalt in San Antonio.",
+    "url": "https://www.druryhotels.com/locations/san-antonio-tx/drury-plaza-hotel-san-antonio-riverwalk",
+    "photo_key": "sanantonio",
+    "author_key": null,
+    "archived": false,
+    "revision": 0
+  }
 ];
-export const TASKS=[['date','Reisezeitraum festlegen','Urlaubstage, Jahreszeit und Flugtage abstimmen.'],['flights','Flugverbindungen vergleichen','Nashville hin · San Antonio zurück als Ausgangsidee.'],['transport','Fahrzeug auswählen','Platz für vier und Gepäck; Einwegmiete berücksichtigen.'],['stay','Unterkünfte planen','9 Nächte vor Ort, Zimmeraufteilung noch offen.'],['budget','Budget gemeinsam festlegen','Gesamtkosten und Reserve pro Person besprechen.'],['mustsee','Must-sees auswählen','Memphis-Highlight, Country-Show und optionale Stopps.'],['documents','Reiseunterlagen prüfen','Gültige Dokumente und aktuelle Einreisevorgaben klären.'],['tickets','Buchungen abschließen','Erst nach finalem Termin und gemeinsamem Plan.']];
+export const TASKS=[["date","Reisezeitraum abstimmen","Termin und gewünschte Reisedauer gemeinsam festlegen."],["flights","Flugverbindungen vergleichen","Start- und Zielort erst nach Auswahl unserer Reiseziele bestimmen."],["transport","Fahrzeug auswählen","Platz für vier und Gepäck; eine mögliche Einwegmiete berücksichtigen."],["stay","Unterkünfte auswählen","Hotelvorschläge vergleichen und Zimmeraufteilung abstimmen."],["budget","Budget gemeinsam festlegen","Gesamtkosten und Reserve pro Person besprechen."],["mustsee","Lieblingsziele auswählen","Vorschläge sammeln, Favoriten markieren und daraus die Route planen."],["documents","Reiseunterlagen prüfen","Gültige Dokumente und aktuelle Einreisevorgaben klären."],["tickets","Buchungen abschließen","Erst nach finalem Termin und gemeinsamem Plan."]];
 export const BUDGET_KEYS=['flight','stay','car','road','food','fun','extra'];
