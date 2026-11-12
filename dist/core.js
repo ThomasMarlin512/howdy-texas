@@ -8,6 +8,6 @@ export function nextRevision(revision){if(!Number.isInteger(revision)||revision<
 export function safeURL(value){try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:'';}catch{return '';}}
 export function validateIdea(raw){const out={};for(const [k,max,min] of [['title',120,2],['location',120,2],['description',2000,10]]){const v=typeof raw[k]==='string'?raw[k].trim():'';if(v.length<min||v.length>max)throw Error(k==='description'?'Bitte beschreibe deine Idee in 10 bis 2.000 Zeichen.':'Name und Ort benötigen jeweils 2 bis 120 Zeichen.');out[k]=v;}
 if(!['destination','hotel'].includes(raw.kind))throw Error('Bitte Reiseziel oder Hotel auswählen.');out.kind=raw.kind;
-if(!['Tennessee','Arkansas','Texas','Andere'].includes(raw.region))throw Error('Bitte eine Region auswählen.');out.region=raw.region;
+if(!['Tennessee','Arkansas','Texas','Louisiana','Andere'].includes(raw.region))throw Error('Bitte eine Region auswählen.');out.region=raw.region;
 if(!Object.hasOwn(PHOTOS,raw.photo_key))throw Error('Bitte ein Bildmotiv auswählen.');out.photo_key=raw.photo_key;
 const url=typeof raw.url==='string'?raw.url.trim():'';if(url&&(url.length>2000||!safeURL(url)))throw Error('Bitte einen vollständigen https://-Link ohne Zugangsdaten eintragen.');out.url=url?safeURL(url):'';return out;}

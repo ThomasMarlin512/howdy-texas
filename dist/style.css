@@ -12,3 +12,20 @@
 
 /* Six navigation destinations remain usable on narrow tablets. */
 .view-nav{overflow-x:auto}.view-nav a{flex-shrink:0}
+
+/* Route alternatives and calendar-day comparison */
+.route-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin:32px 0}
+.route-card{border:1px solid var(--line);background:#fffdf7;border-radius:10px;overflow:hidden;min-width:0}
+.route-cover{height:260px;position:relative;isolation:isolate;background:var(--green);color:var(--light);display:flex;align-items:end;padding:25px}
+.route-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.route-cover:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,24,17,.95),rgba(10,24,17,.1));z-index:-1}
+.route-cover h3{font-size:30px;margin:12px 0 0;line-height:1.2}.route-cover p{margin:7px 0 0}
+.route-body{padding:25px}.route-dates{color:var(--orange);font-weight:700;margin:0}
+.route-path{border-left:3px solid var(--orange);padding-left:14px;font-weight:600}
+.route-body details{border-block:1px solid var(--line);padding:14px 0;margin:20px 0}
+.route-body summary{cursor:pointer;min-height:32px;font-weight:700}.route-body summary:focus-visible{outline:3px solid var(--orange);outline-offset:4px}
+.route-stops{padding-left:23px}.route-stops li{margin:16px 0}.route-stops .quiet{padding:6px 0;text-align:left}.route-stops span{display:block;color:var(--muted);font-size:12px}.route-stops p{margin:5px 0}
+.route-extras{display:flex;flex-wrap:wrap;gap:6px}.route-extras .quiet{border:1px solid var(--line);border-radius:5px;font-size:12px}
+.route-airports{font-size:13px}.table-scroll{overflow-x:auto}.travel-table{width:100%;border-collapse:collapse;margin:20px 0;text-align:left}.travel-table caption{text-align:left;font-weight:700;margin-bottom:10px}.travel-table th,.travel-table td{padding:13px 16px;border-bottom:1px solid var(--line);white-space:nowrap}.travel-table thead{background:var(--green);color:var(--light)}
+@media(max-width:760px){.route-options{grid-template-columns:1fr;gap:20px}.route-cover{height:220px}.route-body{padding:20px}.travel-table th,.travel-table td{padding:12px 10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
