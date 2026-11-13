@@ -14,13 +14,14 @@ For a new database, apply the existing `schema.sql`, private member provisioning
 
 The live project received `howdy_travel_hub_private_documents` and the corrective migration `howdy_document_access_without_policy_recursion`. `document-access-fix.sql` records the latter for an existing installation. The checked-in `travel-hub.sql` already contains the correction; do not apply both when installing afresh. The narrow private SECURITY DEFINER function tests only object existence in the caller's own folder with an empty search_path, avoiding recursive document/Storage policy evaluation. It exposes neither file content nor another member's objects.
 
-Existing ideas, favorites, plan data and credentials are preserved. No user is automatically marked as attending, no option is pre-voted and no date is pre-confirmed. The 22 April–1/3/5 May date options are suggestions only.
+Existing ideas, favorites, plan data and credentials are preserved. As confirmed by the trip organizer on 13 November 2026, all four existing members are fixed participants. No option is pre-voted and no date is pre-confirmed. The 22 April–1/3/5 May date options are suggestions only.
 
 ## Shared records
 
 - `howdy_bookings`: group reads/edits; four kinds and four statuses, two currencies, local timestamps with Central US/Zurich zones. Immutable creator and revision checks. Cancelling changes status and retains the record.
 - `howdy_date_options`: 3–14 inclusive calendar days, earliest 22 April 2027. Own suggestions can be withdrawn/restored; a confirmed option cannot be archived.
-- `howdy_date_votes`, `howdy_idea_ballots`, `howdy_attendance`: group reads, only own writes.
+- `howdy_date_votes`, `howdy_idea_ballots`: group reads, only own writes.
+- The UI shows the four existing verified group members as fixed participants. It no longer reads or writes `howdy_attendance`; the earlier table is retained for backwards compatibility without changing stored records.
 - `howdy_trip_settings`: shared confirmed option and optional external album link, revision protected.
 - Existing heart favorites remain separate from yes/maybe/no votes. The legacy plan remains a budget estimate; its data is not overwritten by date confirmation. Its UI limits on-site days to 13, allowing the extra overnight-return calendar day.
 - Only explicit refresh/login loads other members' changes; no realtime synchronization promise.
@@ -33,7 +34,7 @@ Upload flow: insert pending own metadata, upload through Storage API without ups
 
 Downloads use the authenticated Storage download API and a temporary browser Blob URL with a safe extension. No public or persistent signed document URLs. There is no inline HTML preview. Logging out revokes future access, not files previously downloaded to a device.
 
-## Verification — 12 November 2026
+## Verification — 12–13 November 2026
 
 - 29 offline Node tests pass, covering auth, existing catalog/routes, timezone chronology, invalid dates, maximum trip length, currency totals, overlap rules, file signatures/names, required markup and private page gates.
 - Syntax checks cover both application modules and existing login logic.

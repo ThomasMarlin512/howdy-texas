@@ -12,7 +12,7 @@ Gemeinsame Roadtrip-Website für vier Reisende: [GitHub Pages](https://thomasmar
 - Gebuchte Gesamtpreise getrennt in EUR und USD; Budgetschätzung und Aufgaben bleiben separat.
 - Private Flugtickets, Hotelbestätigungen und Mietwagen-Voucher hochladen und herunterladen: PDF, JPEG, PNG, WebP, HEIC/HEIF, maximal 10 MiB pro Datei.
 - Terminabstimmung mit Kalender und gemeinsamer Festlegung; früheste Abreise 22.04.2027, maximal 14 Kalendertage einschließlich Heimkehr.
-- Eigene Teilnahme zusagen, offenlassen oder absagen.
+- Feste Reisegruppe: Alle vier Mitglieder sind bestätigt; keine erneute Teilnahmeabfrage.
 - Gemeinsamen externen Albumlink hinterlegen; Fotos werden direkt beim Albumanbieter hochgeladen.
 
 Keine automatische Buchung, keine Zusage von Preisen oder Verfügbarkeit. Jeder Eintrag bleibt eine Idee, bis die Gruppe seinen Status ändert. Änderungen erscheinen auf anderen Geräten nach Anmeldung oder „Aktualisieren“.
@@ -21,7 +21,7 @@ Keine automatische Buchung, keine Zusage von Preisen oder Verfügbarkeit. Jeder 
 
 Vorname ohne Beachtung der Groß-/Kleinschreibung und vereinbartes Gruppenpasswort. Die Passwortschreibweise zählt genau. Vier unabhängige Texas-Zugänge; Passwort und Hashes stehen nicht im Quellcode. Ein gemeinsames Passwort prüft die Gruppenzugehörigkeit, nicht unabhängig die Identität einer Person.
 
-Supabase prüft die verifizierte Gruppensitzung bei jedem Datenzugriff. Buchungen und gemeinsame Einstellungen darf die Gruppe bearbeiten; eigene Stimmen, Teilnahme und Dokumente nur das jeweilige Mitglied. Revisionen schützen gemeinsame Buchungen und Einstellungen gegen versehentliches Überschreiben.
+Supabase prüft die verifizierte Gruppensitzung bei jedem Datenzugriff. Buchungen und gemeinsame Einstellungen darf die Gruppe bearbeiten; eigene Stimmen und Dokumente nur das jeweilige Mitglied. Revisionen schützen gemeinsame Buchungen und Einstellungen gegen versehentliches Überschreiben.
 
 Unterlagen liegen in einem privaten Storage-Bucket, niemals im öffentlichen GitHub-Repository. Auch eine normale anonyme Auth-Sitzung genügt nicht zum Zugriff: Die Gruppenanmeldung muss erfolgreich gewesen sein. Downloads benötigen die gültige Gruppensitzung. Beim Abmelden wird die Berechtigung serverseitig entzogen. Bereits heruntergeladene Dateien bleiben auf dem Gerät. Für die Freigabe eines externen Fotoalbums gelten die Einstellungen des Albumanbieters.
 

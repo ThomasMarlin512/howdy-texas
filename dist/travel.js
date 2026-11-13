@@ -6,7 +6,7 @@ const money=(n,c)=>n===null?'Preis offen':new Intl.NumberFormat('de-AT',{style:'
 const localTime=(s,z)=>s?day(s)+' · '+s.slice(11,16)+' ('+(z==='Europe/Zurich'?'Zürich':'Central Time')+')':'Zeit noch offen';
 const BUCKET='howdy-documents';
 export function createTravelHub({client,context,ideas,toast,openLogin,onChange}){
- let bookings=[],documents=[],dates=[],dateVotes=[],attendance=[],ballots=[],settings=null,editing=null,formIdea=null,busy=false,month='2027-04',selectedDay='',epoch=0;
+ let bookings=[],documents=[],dates=[],dateVotes=[],ballots=[],settings=null,editing=null,formIdea=null,busy=false,month='2027-04',selectedDay='',epoch=0;
  let dirtyForms=new Set(),confirmResolve=null;
  const same=c=>context()===c&&!!c;
  const memberName=key=>context()?.people.find(p=>p.key===key)?.name||'Crewmitglied';
@@ -14,9 +14,9 @@ export function createTravelHub({client,context,ideas,toast,openLogin,onChange})
  async function rows(table,order='id'){let result=[];for(let offset=0;;offset+=1000){const r=await client().from(table).select('*').order(order).range(offset,offset+999);if(r.error)throw Error('Gemeinsame Reisedaten konnten nicht geladen werden. Bitte erneut versuchen.');result.push(...r.data);if(r.data.length<1000)return result;}}
  async function load(){
   const c=context(),version=epoch;if(!c)return;
-  const result=await Promise.all([rows('howdy_bookings'),rows('howdy_documents'),rows('howdy_date_options'),rows('howdy_date_votes','option_id'),rows('howdy_attendance','member_key'),rows('howdy_idea_ballots','idea_id'),rows('howdy_trip_settings')]);
+  const result=await Promise.all([rows('howdy_bookings'),rows('howdy_documents'),rows('howdy_date_options'),rows('howdy_date_votes','option_id'),rows('howdy_idea_ballots','idea_id'),rows('howdy_trip_settings')]);
   if(!same(c)||version!==epoch)return;
-  [bookings,documents,dates,dateVotes,attendance,ballots]=result;settings=result[6][0];render();onChange();status('Gemeinsamer Stand · '+new Date().toLocaleTimeString('de-AT'));
+  [bookings,documents,dates,dateVotes,ballots]=result;settings=result[5][0];render();onChange();status('Gemeinsamer Stand · '+new Date().toLocaleTimeString('de-AT'));
  }
  function voteControls(type,id,rows,key){
   const own=rows.find(v=>v[key]===id&&v.member_key===context()?.me)?.choice;
@@ -59,15 +59,11 @@ export function createTravelHub({client,context,ideas,toast,openLogin,onChange})
   const visible=active.filter(d=>!selectedDay||(selectedDay>=d.start_date&&selectedDay<=d.end_date));
   $('#date-options').innerHTML=visible.map(d=>'<article class="panel"><p class="eyebrow">'+validateDates(d.start_date,d.end_date).days+' TAGE INKLUSIVE HEIMKEHR</p><h3>'+day(d.start_date)+' – '+day(d.end_date)+'</h3>'+voteControls('date',d.id,dateVotes,'option_id')+'<div class="hub-actions">'+(settings?.confirmed_option===d.id?'<strong>Gemeinsam festgelegt</strong><button class="quiet" data-date-confirm="clear">Festlegung aufheben</button>':'<button class="quiet" data-date-confirm="'+esc(d.id)+'">Als gemeinsamen Termin festlegen</button>')+(d.created_by===context()?.me&&settings?.confirmed_option!==d.id?'<button class="quiet" data-date-archive="'+esc(d.id)+'">Vorschlag zurückziehen</button>':'')+'</div></article>').join('')||'<p>Keine Terminvorschläge für diese Auswahl.</p>';
  }
- function renderAttendance(){
-  if(!context()){$('#attendance-list').replaceChildren();return;}
-  $('#attendance-list').innerHTML=context().people.map(p=>{const own=attendance.find(a=>a.member_key===p.key)?.choice;return '<div class="attendance-row"><strong>'+esc(p.name)+'</strong>'+(p.key===context().me?'<label>Meine Teilnahme<select id="my-attendance"><option value="">Noch offen</option>'+Object.entries(CHOICES).map(([v,l])=>'<option value="'+v+'" '+(own===v?'selected':'')+'>'+l+'</option>').join('')+'</select></label>':'<span>'+esc(CHOICES[own]||'Noch offen')+'</span>')+'</div>';}).join('');
- }
  function renderAlbum(){
   $('#album-link').innerHTML=settings?.album_url&&safeURL(settings.album_url)?'<p class="eyebrow">UNSER GETEILTES ALBUM</p><h3>'+esc(settings.album_label)+'</h3><a class="button primary" href="'+esc(safeURL(settings.album_url))+'" target="_blank" rel="noopener noreferrer">Fotoalbum öffnen ↗</a>':'<h3>Noch kein Album verlinkt.</h3><p>Ein gemeinsames Album bei eurem Fotoanbieter erstellen und den Freigabelink unten ergänzen.</p>';
   if(!dirtyForms.has('album-form')){const f=$('#album-form');f.elements.album_label.value=settings?.album_label||'Unser gemeinsames Fotoalbum';f.elements.album_url.value=settings?.album_url||'';}
  }
- function render(){renderBookings();renderDocs();renderDates();renderAttendance();renderAlbum();}
+ function render(){renderBookings();renderDocs();renderDates();renderAlbum();}
  async function run(action,errorTarget){
   if(!context()){openLogin();return;}if(busy)return;
   const c=context();busy=true;
@@ -163,7 +159,6 @@ export function createTravelHub({client,context,ideas,toast,openLogin,onChange})
  $('#document-form').addEventListener('submit',e=>{e.preventDefault();run(upload,'#document-error');});
  $('#date-option-form').addEventListener('submit',e=>{e.preventDefault();run(async c=>{const {start_date,end_date}=validateDates(e.target.elements.start_date.value,e.target.elements.end_date.value);const withdrawn=dates.find(d=>d.start_date===start_date&&d.end_date===end_date&&d.archived&&d.created_by===c.me);const r=withdrawn?await client().from('howdy_date_options').update({archived:false,revision:nextRevision(withdrawn.revision)}).eq('id',withdrawn.id).eq('revision',withdrawn.revision).select():await client().from('howdy_date_options').insert({start_date,end_date}).select();if(r.error)throw Error(r.error.code==='23505'?'Diesen Zeitraum gibt es bereits.':'Terminvorschlag konnte nicht gespeichert werden.');if(r.data.length!==1)throw Error('Termin inzwischen geändert. Bitte aktualisieren.');if(same(c)){$('#date-option-error').textContent=withdrawn?'Vorschlag wieder aufgenommen.':'Vorschlag gespeichert.';dirtyForms.delete('date-option-form');selectedDay='';month=start_date.slice(0,7);await load();}},'#date-option-error');});
  $('#album-form').addEventListener('submit',e=>{e.preventDefault();run(async c=>{const f=e.target,album_url=f.elements.album_url.value.trim(),album_label=f.elements.album_label.value.trim();if(album_url&&!safeURL(album_url))throw Error('Bitte einen gültigen HTTPS-Albumlink ohne Zugangsdaten eingeben.');if(!album_label)throw Error('Bezeichnung eingeben.');await settingsUpdate({album_url,album_label},c);if(same(c)){dirtyForms.delete('album-form');renderAlbum();$('#album-error').textContent='Für die Gruppe gespeichert.';}},'#album-error');});
- $('#attendance-list').addEventListener('change',e=>{if(e.target.id!=='my-attendance')return;run(async c=>{const choice=e.target.value;const r=choice?await client().from('howdy_attendance').upsert({member_key:c.me,choice}):await client().from('howdy_attendance').delete().eq('member_key',c.me);check(r,'Teilnahme konnte nicht gespeichert werden.');await load();});});
  for(const id of ['booking-form','document-form','date-option-form','album-form'])$('#'+id).addEventListener('input',()=>dirtyForms.add(id));
  $('#booking-dialog').addEventListener('cancel',async e=>{e.preventDefault();if(busy)return;if(!dirtyForms.has('booking-form')||await confirmAction('Ungespeicherte Änderungen verwerfen?')){dirtyForms.delete('booking-form');$('#booking-dialog').close();}});
  $('#booking-dialog').addEventListener('close',()=>{editing=null;formIdea=null;dirtyForms.delete('booking-form');$('#booking-form').reset();});
@@ -175,7 +170,7 @@ export function createTravelHub({client,context,ideas,toast,openLogin,onChange})
  window.addEventListener('afterprint',()=>{printDetails.forEach(d=>d.open=false);printDetails=[];});
  $('#trip-print').addEventListener('click',()=>window.print());
  function clear(){
-  epoch++;bookings=[];documents=[];dates=[];dateVotes=[];attendance=[];ballots=[];settings=null;editing=null;formIdea=null;dirtyForms.clear();
+  epoch++;bookings=[];documents=[];dates=[];dateVotes=[];ballots=[];settings=null;editing=null;formIdea=null;dirtyForms.clear();
   if(confirmResolve)confirmDone(false);
   if($('#booking-dialog').open)$('#booking-dialog').close();
   for(const id of ['booking-form','document-form','date-option-form','album-form'])$('#'+id).reset();
