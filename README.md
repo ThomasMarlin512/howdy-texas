@@ -4,6 +4,9 @@ Gemeinsame Roadtrip-Website für vier Reisende: [GitHub Pages](https://thomasmar
 
 ## Funktionen
 
+- Fünf Hauptbereiche: Start, Route, Buchungen, Unterlagen und Gruppe; alle bisherigen Direktlinks bleiben gültig.
+- Interaktive Straßenkarte der vier Routenvorschläge mit Entfernungen, geschätzter Fahrzeit, Übernachtungen und Hinweisen auf Fahrtage über vier Stunden. Etappenliste und einzelne Google-Maps-Links bleiben auch ohne Kartenhintergrund nutzbar.
+
 - 15 Reiseziele, 13 Unterkünfte und vier Routenvorschläge als unverbindliche Ideen mit Ortsfotos und offiziellen Links.
 - Eigene Ziele und Hotels vorschlagen, bearbeiten und zurückziehen; persönliche Favoriten sowie getrennte Ja/Vielleicht/Nein-Abstimmungen.
 - Mietwagenangebote mit Gepäckplatz, Stationen, Versicherung, Selbstbehalt, Kaution, Zusatzfahrern, Tankregelung und Einweggebühr vergleichen.
@@ -41,4 +44,9 @@ Vier Personen, früheste Abreise laut Manu am 22. April. Die Beispielrouten umfa
 ## Quellen
 
 Hotelangaben: offizielle Links pro Karte, Bestand geprüft am 11.11.2026, Erweiterungen am 12.11.2026. Bildquellen, Urheber und Lizenzen in `dist/data.js` und im Footer. Hotelkarten zeigen ausdrücklich Stadtmotive. Bilder werden beschnitten und abgedunkelt. Supabase JS ist auf 2.57.4 festgelegt.
+
+
+## Routenkarte
+
+Pkw-Strecken zwischen Ortszentren, Stand 14.11.2026; keine Live-Verkehrsdaten. Pausen, Flughafenwege und optionale Ausflüge kommen hinzu. Die Kartenauswahl bestätigt keinen Reiseplan. [Quellen, Berechnung und Kartennutzung](docs/route-map-sources.md).
 

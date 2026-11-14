@@ -34,10 +34,11 @@ Upload flow: insert pending own metadata, upload through Storage API without ups
 
 Downloads use the authenticated Storage download API and a temporary browser Blob URL with a safe extension. No public or persistent signed document URLs. There is no inline HTML preview. Logging out revokes future access, not files previously downloaded to a device.
 
-## Verification — 12–13 November 2026
+## Verification — 12–14 November 2026
 
-- 29 offline Node tests pass, covering auth, existing catalog/routes, timezone chronology, invalid dates, maximum trip length, currency totals, overlap rules, file signatures/names, required markup and private page gates.
-- Syntax checks cover both application modules and existing login logic.
+- 35 offline Node tests pass, covering auth, existing catalog/routes, timezone chronology, invalid dates, maximum trip length, currency totals, overlap rules, file signatures/names, required markup and private page gates.
+- Syntax checks cover application, navigation, map modules and existing login logic.
+- The navigation/map update changes only static files: no auth, storage, booking or other database policies are modified. Six additional tests cover all five navigation groups, legacy hashes, directed road data, city coordinates, overnight continuity, long-drive thresholds and directions links. The two pinned Leaflet CDN integrity hashes were verified.
 - `tests/travel-hub.sql` ran against two disposable existing Auth user UUIDs inside a rolled-back transaction. It checked outsider denial, own votes, shared booking edits, revision conflicts, date bounds, pending-file isolation, confirmed-date archive protection, and expired membership. Set the session settings `howdy.test.user1` / `howdy.test.user2` before running. Do not run unrelated account provisioning in this test.
 - 21 live HTTP assertions passed using two temporary anonymous Auth sessions and one synthetic PDF: normal first-name login, pending metadata, denial of finalization without a file, upload/finalization, exact-byte owner and group downloads, denied public/unverified downloads, denied foreign deletes and overwrite, orphan prevention, owner cleanup and logout revocation.
 - Read-only database checks confirmed zero synthetic documents, objects, booking rows or group sessions remained. Auth users created through normal anonymous signup were not deleted.
