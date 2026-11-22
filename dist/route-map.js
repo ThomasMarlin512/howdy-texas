@@ -26,7 +26,7 @@ export function createRouteExplorer(){
   $('#map-stop-list').innerHTML=data.stops.map((s,i)=>'<li><button type="button" class="map-stop-button" data-map-stop="'+i+'" aria-pressed="false"><span class="stop-number">'+(i+1)+'</span><span><strong>'+esc(s.name)+'</strong><small>'+s.nights+' '+(s.nights===1?'Nacht':'Nächte')+' · '+fmt(s.arrival)+' – '+fmt(s.departure)+'</small></span></button></li>').join('');
   $('#map-leg-list').innerHTML=data.legs.map(l=>'<li class="map-leg'+(l.longDrive?' long-drive':'')+'"><div class="leg-heading"><span>Etappe '+(l.index+1)+' · '+fmt(l.date)+'</span>'+(l.longDrive?'<strong>Langer Fahrtag</strong>':'')+'</div><h4>'+esc(l.fromStop.name)+' → '+esc(l.toStop.name)+'</h4><p><b>'+distanceLabel(l.meters)+'</b><span>'+durationLabel(l.seconds)+'</span></p>'+(l.longDrive?'<p class="muted">Pausen zusätzlich einplanen und den Tag nicht mit weiteren Pflichtstopps füllen.</p>':'')+'<div class="hub-actions"><button type="button" class="quiet" data-map-leg="'+l.index+'" aria-pressed="false">Etappe auf Karte</button><a href="'+esc(googleLegURL(l))+'" target="_blank" rel="noopener noreferrer">In Google Maps öffnen ↗</a></div></li>').join('');
   $('#map-selection').textContent='Ort oder Etappe auswählen, um sie auf der Karte hervorzuheben.';
-  $('#route-map-source-date').textContent=new Date(ROAD_DATA.checkedAt+'T12:00:00Z').toLocaleDateString('de-AT',{timeZone:'UTC'});
+  $('#route-map-source-date').textContent=new Date((selected.checkedAt??ROAD_DATA.checkedAt)+'T12:00:00Z').toLocaleDateString('de-AT',{timeZone:'UTC'});
   if(map)draw();
  }
  function paint(){

@@ -38,3 +38,9 @@
 @media(max-width:800px){.view-nav{padding:0 14px;gap:5px}.view-nav a{font-size:13px}.route-map-summary>div{padding:14px}.route-map-summary strong{font-size:15px}.map-detail-columns{grid-template-columns:1fr;gap:24px}.map-stop-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px}.route-map{height:390px}}
 @media(max-width:550px){.view-nav{padding:0 6px;gap:0}.view-nav a{font-size:11px;min-height:54px;padding-inline:2px}.section-nav{gap:2px 6px;padding:5px 6px}.section-nav a{font-size:11px;min-height:42px;padding:5px 7px}.route-explorer-head{padding:20px 16px;gap:14px}.route-explorer-head label{width:100%}.route-explorer-head h3{font-size:26px}.route-map-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.route-map-summary>div{padding:13px 16px}.route-map{height:330px}.map-detail-columns{padding:18px 14px}.map-stop-list{display:block}.map-toolbar,.map-source{padding:12px 16px}.map-help,.map-status{padding-inline:16px}.map-legend{padding:0 16px 12px}.map-leg{padding:13px 12px}.map-leg .hub-actions{gap:10px}.route-explorer{scroll-margin-top:160px}}
 @media print{.nav-shell,.route-explorer{display:none!important}}
+
+.trip-days { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr)); gap:1rem; padding:0; margin:1.5rem 0 2rem; list-style:none; }
+.trip-days li { padding:1rem 1.15rem; border-left:3px solid #ac502d; background:#fffaf1; color:#24352b; }
+.trip-days p { margin:.55rem 0; }
+.trip-days small { font-weight:600; }
+.travel-table tfoot { font-weight:bold; }

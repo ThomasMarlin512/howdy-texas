@@ -27,7 +27,7 @@ export function createTravelHub({client,context,ideas,toast,openLogin,onChange})
   return '<div class="idea-ballot">'+(related.length?'<p class="booking-status">'+(related.some(b=>b.status==='booked')?'Gebucht':'Eingeplant')+' · <a href="#reiseplan">Im Reiseplan ansehen</a></p>':'')+voteControls('idea',i.id,ballots,'idea_id')+'<button class="quiet" data-book-idea="'+esc(i.id)+'">In den Reiseplan aufnehmen +</button></div>';
  }
  function confirmed(){return dates.find(d=>d.id===settings?.confirmed_option);}
- function confirmedLabel(){const d=confirmed();return d?'Gemeinsam festgelegt: '+day(d.start_date)+' – '+day(d.end_date)+' · '+validateDates(d.start_date,d.end_date).days+' Tage inklusive Heimkehr.':'Noch kein gemeinsamer Reisetermin festgelegt.';}
+ function confirmedLabel(){const d=confirmed();return d?'Termin aus der Gruppenabstimmung: '+day(d.start_date)+' – '+day(d.end_date)+' · '+validateDates(d.start_date,d.end_date).days+' Tage inklusive Heimkehr.':'Gewählte Reise: 20. April bis 1. Mai 2027.';}
  function bookingCard(b,conflicts=new Set()){
   const attached=documents.filter(d=>d.booking_id===b.id&&d.ready);
   const d=confirmed(),outside=d&&b.start_local&&(b.start_local.slice(0,10)<d.start_date||(b.end_local||b.start_local).slice(0,10)>d.end_date);
@@ -36,7 +36,7 @@ export function createTravelHub({client,context,ideas,toast,openLogin,onChange})
  function renderBookings(){
   const sorted=[...bookings].sort(bookingOrder),planned=sorted.filter(b=>['planned','booked'].includes(b.status)),conflicts=overlaps(planned);
   const groups=new Map();for(const b of planned){const key=b.start_local?.slice(0,10)||'';if(!groups.has(key))groups.set(key,[]);groups.get(key).push(b);}
-  $('#trip-timeline').innerHTML=groups.size?[...groups].map(([date,items])=>'<section class="timeline-day"><h3>'+esc(date?day(date):'Noch ohne Datum')+'</h3>'+items.map(b=>bookingCard(b,conflicts)).join('')+'</section>').join(''):'<div class="empty-state"><h3>Unser Plan entsteht gemeinsam.</h3><p>Reiseidee übernehmen oder Flug, Hotel, Mietwagen und Aktivität hinzufügen. Wähle „Eingeplant“ oder „Gebucht“, damit ein Eintrag hier erscheint.</p></div>';
+  $('#trip-timeline').innerHTML=groups.size?[...groups].map(([date,items])=>'<section class="timeline-day"><h3>'+esc(date?day(date):'Noch ohne Datum')+'</h3>'+items.map(b=>bookingCard(b,conflicts)).join('')+'</section>').join(''):'<div class="empty-state"><h3>Weitere Gruppeneinträge</h3><p>Reiseidee übernehmen oder Flug, Hotel, Mietwagen und Aktivität hinzufügen. Wähle „Eingeplant“ oder „Gebucht“, damit ein Eintrag hier erscheint.</p></div>';
   $('#booking-ideas').innerHTML=sorted.filter(b=>!['planned','booked'].includes(b.status)).map(b=>bookingCard(b)).join('')||'<p>Noch keine weiteren Einträge.</p>';
   $('#flight-bookings').innerHTML=sorted.filter(b=>b.kind==='flight').map(b=>bookingCard(b)).join('')||'<p>Noch kein Flug eingetragen. Die Suchvorschläge darunter bleiben unverbindlich.</p>';
   const cars=sorted.filter(b=>b.kind==='car');$('#car-bookings').innerHTML=cars.map(b=>bookingCard(b)).join('')||'<div class="empty-state"><h3>Noch kein Mietwagenangebot.</h3><p>Angebotslink und Konditionen eintragen, anschließend gemeinsam vergleichen.</p></div>';

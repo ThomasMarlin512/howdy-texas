@@ -5,7 +5,7 @@ Gemeinsame Roadtrip-Website für vier Reisende: [GitHub Pages](https://thomasmar
 ## Funktionen
 
 - Fünf Hauptbereiche: Start, Route, Buchungen, Unterlagen und Gruppe; alle bisherigen Direktlinks bleiben gültig.
-- Interaktive Straßenkarte der vier Routenvorschläge mit Entfernungen, geschätzter Fahrzeit, Übernachtungen und Hinweisen auf Fahrtage über vier Stunden. Etappenliste und einzelne Google-Maps-Links bleiben auch ohne Kartenhintergrund nutzbar.
+- Interaktive Straßenkarte der gewählten Dallas-Runde (20. April bis 1. Mai 2027) und der vier früheren Routenvorschläge mit Entfernungen, geschätzter Fahrzeit, Übernachtungen und Hinweisen auf Fahrtage über vier Stunden. Etappenliste und einzelne Google-Maps-Links bleiben auch ohne Kartenhintergrund nutzbar.
 
 - 15 Reiseziele, 13 Unterkünfte und vier Routenvorschläge als unverbindliche Ideen mit Ortsfotos und offiziellen Links.
 - Eigene Ziele und Hotels vorschlagen, bearbeiten und zurückziehen; persönliche Favoriten sowie getrennte Ja/Vielleicht/Nein-Abstimmungen.

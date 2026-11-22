@@ -1,6 +1,6 @@
 export const NAV_GROUPS=[
  {id:'start',label:'Start',href:'reiseinfos',views:[['reiseinfos','Reiseinfos']]},
- {id:'route',label:'Route',href:'routen',views:[['routen','Routenvorschläge'],['programm','Reiseziele'],['hotels','Hotelideen']]},
+ {id:'route',label:'Route',href:'routen',views:[['routen','Unsere Route'],['programm','Reiseziele'],['hotels','Hotelideen']]},
  {id:'buchungen',label:'Buchungen',href:'reiseplan',views:[['reiseplan','Reiseplan'],['anreise','Flüge'],['mietwagen','Mietwagen'],['planung','Budget & Aufgaben']]},
  {id:'unterlagen',label:'Unterlagen',href:'unterlagen',views:[['unterlagen','Tickets & Bestätigungen']]},
  {id:'gruppe',label:'Gruppe',href:'gruppe',views:[['gruppe','Unsere Crew'],['termine','Termine'],['fotos','Fotos']]}

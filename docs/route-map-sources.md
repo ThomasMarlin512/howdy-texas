@@ -1,6 +1,6 @@
 # Route map: sources and method
 
-Snapshot retrieved on 14 November 2026. The map compares the four existing route proposals; choosing a map option does not confirm a route, change the shared itinerary, or write group data.
+The selected Dallas round trip uses four additional OSRM segments fetched on 22 November 2026 and the previously cached Austin–San Antonio segment. Earlier alternatives use the 14 November 2026 snapshot. The map opens on the selected Dallas route and can display the four previous proposals; choosing a map option does not confirm a route, change the shared itinerary, or write group data.
 
 ## Road estimates
 
