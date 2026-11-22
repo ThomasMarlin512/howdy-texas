@@ -1,3 +1,4 @@
+import {TRIP_PHOTOS} from './trip-photos.js';
 import {IDEAS,PHOTOS,TASKS,BUDGET_KEYS} from './data.js';
 import {DALLAS_TRIP,TRIP_DAYS,addDays,routeSchedule} from './routes.js';
 import {createTravelHub} from './travel.js';
@@ -19,18 +20,20 @@ function photo(i){return PHOTOS[i.photo_key]||PHOTOS.roadtrip;}
 function author(i){return i.author_key?'Vorgeschlagen von '+(context?.people.find(p=>p.key===i.author_key)?.name||'einem Crewmitglied'):'Startvorschlag';}
 function mine(i){return !!context&&votes.some(v=>v.idea_id===i.id&&v.member_key===context.me);}
 function count(i){return votes.filter(v=>v.idea_id===i.id).length;}
-function photoHTML(i,extra=''){const p=photo(i);return '<div class="idea-photo '+extra+'"><img src="'+esc(p.url)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"><div class="idea-shade"></div><div class="photo-caption"><span class="idea-badge">Vorschlag · '+esc(i.region)+'</span><h3>'+esc(i.title)+'</h3><p>'+esc(i.location)+'</p></div><small class="photo-motif">'+(i.kind==='hotel'?'Stadtmotiv: ':'Bildmotiv: ')+esc(p.label)+'</small></div>';}
+function photoHTML(i,extra=''){const p=photo(i);return '<div class="idea-photo '+extra+'"><img src="'+esc(p.url)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"><div class="idea-shade"></div><div class="photo-caption"><span class="idea-badge">Vorschlag · '+esc(i.region)+'</span><h3>'+esc(i.title)+'</h3><p>'+esc(i.location)+'</p></div><small class="photo-motif">'+(i.kind==='hotel'?'Ortsmotiv: ':'Bildmotiv: ')+esc(p.label)+'</small></div>';}
 function voteButton(i){return '<button class="vote-button" data-vote="'+esc(i.id)+'" aria-pressed="'+mine(i)+'" aria-label="'+esc(i.title)+': '+(mine(i)?'Favorit entfernen':'als Favorit markieren')+'">'+(mine(i)?'♥':'♡')+' '+(context?count(i)+' Favorit'+(count(i)===1?'':'en'):'Merken')+'</button>';}
 
 function renderRoutes(){
  const fmt=iso=>df.format(new Date(iso+'T12:00:00Z'));
  const destination=key=>IDEAS.find(i=>i.id==='destination-'+key);
  const schedule=routeSchedule(DALLAS_TRIP);
- const dayList=TRIP_DAYS.map(([title,note,url],index)=>{
+ const dayList=TRIP_DAYS.map(([title,note,url,photoKey],index)=>{
   const day=addDays(schedule.start,index);
   const overnight=schedule.stops.find(stop=>stop.arrival<=day&&day<stop.departure);
   const bed=overnight?'Übernachtung in '+destination(overnight.key).location.split(' & ')[0]:day===schedule.departUS?'Nachtflug nach Zürich':'Heimkehr';
-  return `<li><time datetime="${day}">${fmt(day)}</time><strong>${esc(title)}</strong><p>${esc(note)}</p><small>${esc(bed)}</small>${url?' · <a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Vor dem Besuch ↗</a>':''}</li>`;
+  const picture=TRIP_PHOTOS[photoKey];
+  const image=picture ? `<figure class="trip-picture"><img src="${esc(picture.url)}" alt="${esc(picture.label)}" loading="lazy" decoding="async"><figcaption>${esc(picture.label)}</figcaption></figure>` : '';
+  return `<li>${image}<time datetime="${day}">${fmt(day)}</time><strong>${esc(title)}</strong><p>${esc(note)}</p><small>${esc(bed)}</small>${url?' · <a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Vor dem Besuch ↗</a>':''}</li>`;
  }).join('');
  $$('[data-trip-days]').forEach(el=>el.innerHTML=dayList);
  const r=DALLAS_TRIP,w=schedule,p=PHOTOS[r.photo];
@@ -39,7 +42,7 @@ function renderRoutes(){
 
 const routeOrder=[...DALLAS_TRIP.stops.map(([key])=>key),...DALLAS_TRIP.optional];
 function onRoute(idea){return routeOrder.includes(idea.photo_key)||DALLAS_TRIP.stops.some(([key])=>idea.location.toLowerCase().includes(placeName(key)));}
-function placeName(key){return PHOTOS[key].label.split(' · ')[0].toLowerCase();}
+function placeName(key){return ({wildcatter:'graham',mountvernon:'mount vernon'})[key]||IDEAS.find(i=>i.id==='destination-'+key).location.toLowerCase();}
 function description(idea){
  if(!idea.author_key&&idea.kind==='destination'){
   const stop=DALLAS_TRIP.stops.find(([key])=>idea.id==='destination-'+key);
@@ -58,7 +61,7 @@ function renderCatalog(){
  $$('.catalog-status').forEach(el=>el.textContent=context?'Gemeinsame Sammlung · Ergänze eigene Ideen und markiere deine Favoriten.':'Startvorschläge · Melde dich an, um die Ideen der Gruppe zu sehen und eigene Vorschläge zu speichern.');
  renderGroup();
 }
-function showDetail(id){const i=ideas.find(i=>i.id===id&&!i.archived);if(!i)return;$('#idea-detail').innerHTML=photoHTML(i,'detail-photo')+'<p class="eyebrow">'+esc(author(i))+'</p><h2 id="detail-title">'+esc(i.title)+'</h2><p class="detail-description">'+esc(description(i))+'</p><p class="detail-tip">Unverbindlicher Vorschlag. '+(i.kind==='hotel'?'Preise, freie Zimmer und Bedingungen zum Reisetermin prüfen. Das Foto zeigt den Ort, nicht das Hotel.':'Details und Zeiten der Ausflüge stimmen wir gemeinsam ab.')+'</p><div class="dialog-links"><a href="'+esc(maps(i))+'" target="_blank" rel="noopener noreferrer">Auf der Karte ↗</a>'+(safeURL(i.url)?'<a href="'+esc(safeURL(i.url))+'" target="_blank" rel="noopener noreferrer">'+(i.kind==='hotel'?'Offizielle Website / Hotel':'Website zum Vorschlag')+' ↗</a>':'')+'</div><small class="muted">Foto: '+esc(photo(i).author)+' · <a href="'+esc(photo(i).source)+'" target="_blank" rel="noopener noreferrer">'+esc(photo(i).license)+'</a></small>';
+function showDetail(id){const i=ideas.find(i=>i.id===id&&!i.archived);if(!i)return;$('#idea-detail').innerHTML=photoHTML(i,'detail-photo')+'<p class="eyebrow">'+esc(author(i))+'</p><h2 id="detail-title">'+esc(i.title)+'</h2><p class="detail-description">'+esc(description(i))+'</p><p class="detail-tip">Unverbindlicher Vorschlag. '+(i.kind==='hotel'?'Preise, freie Zimmer und Bedingungen zum Reisetermin prüfen. Das Foto zeigt den Ort oder die Umgebung der Unterkunft.':'Details und Zeiten der Ausflüge stimmen wir gemeinsam ab.')+'</p><div class="dialog-links"><a href="'+esc(maps(i))+'" target="_blank" rel="noopener noreferrer">Auf der Karte ↗</a>'+(safeURL(i.url)?'<a href="'+esc(safeURL(i.url))+'" target="_blank" rel="noopener noreferrer">'+(i.kind==='hotel'?'Offizielle Website / Hotel':'Website zum Vorschlag')+' ↗</a>':'')+'</div><small class="muted">Foto: '+esc(photo(i).author)+' · <a href="'+esc(photo(i).source)+'" target="_blank" rel="noopener noreferrer">'+esc(photo(i).license)+'</a></small>';
  $('#idea-detail-dialog').setAttribute('aria-labelledby','detail-title');$('#idea-detail-dialog').showModal();
 }
 function route(scroll=true){const {view}=resolveView(location.hash);if($('#idea-detail-dialog').open)$('#idea-detail-dialog').close();$$('[data-view]').forEach(x=>x.hidden=x.dataset.view!==view);updateNavigation(view);document.title=({reiseinfos:'Howdy Texas',programm:'Unsere Reiseideen',routen:'Unsere Texas-Runde',hotels:'Unsere Hotelideen',anreise:'Anreise & Flüge',mietwagen:'Mietwagen',reiseplan:'Unser Reiseplan',unterlagen:'Reiseunterlagen',termine:'Terminabstimmung',fotos:'Unsere Fotos',gruppe:'Unsere Gruppe',planung:'Unsere Planung'})[view]+' · Roadtrip';if(view==='routen')routeExplorer.activate();if(scroll)$('.nav-shell').scrollIntoView({behavior:'instant',block:'start'});}
@@ -83,7 +86,7 @@ async function setArchived(id,archived){if(!context)return;const i=ideas.find(x=
 $('#task-list').innerHTML=TASKS.map(([id,title,note])=>'<label class="task-label"><input type="checkbox" name="task-'+id+'"><span><b>'+esc(title)+'</b><small>'+esc(note)+'</small></span></label>').join('');
 $('#budget-inputs').innerHTML=BUDGET_KEYS.map(k=>'<label>'+labels[k]+'<input type="number" name="'+k+'" min="0" max="100000" step="0.01" inputmode="decimal"></label>').join('');
 $('#photo-select').innerHTML=Object.entries(PHOTOS).map(([key,p])=>'<option value="'+key+'">'+esc(p.label)+'</option>').join('');
-$('#photo-credits').innerHTML=Object.values(PHOTOS).map(p=>'<li>'+esc(p.label)+' · <a href="'+esc(p.source)+'" target="_blank" rel="noopener noreferrer">'+esc(p.author)+'</a> · <a href="'+esc(p.licenseUrl)+'" target="_blank" rel="noopener noreferrer">'+esc(p.license)+'</a></li>').join('');
+$('#photo-credits').innerHTML=[...new Set([...Object.values(PHOTOS),...Object.values(TRIP_PHOTOS)])].map(p=>'<li>'+esc(p.label)+' · <a href="'+esc(p.source)+'" target="_blank" rel="noopener noreferrer">'+esc(p.author)+'</a> · <a href="'+esc(p.licenseUrl)+'" target="_blank" rel="noopener noreferrer">'+esc(p.license)+'</a></li>').join('');
 document.addEventListener('click',async e=>{
  const close=e.target.closest('[data-close]');if(close){if(close.dataset.close==='idea-dialog'&&(ideaSaving||(editorDirty&&!confirm('Ungespeicherten Vorschlag verwerfen?'))))return;$('#'+close.dataset.close).close();return;}
  const add=e.target.closest('[data-add]');if(add){openIdea(add.dataset.add);return;}

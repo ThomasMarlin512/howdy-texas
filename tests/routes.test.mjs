@@ -30,6 +30,6 @@ test('Dallas trip covers every day from departure to homecoming',()=>{
  assert.equal(ROUTES[0],DALLAS_TRIP);
  assert.deepEqual([w.start,w.departUS,w.home,w.nights],['2027-04-19','2027-04-30','2027-05-01',11]);
  assert.equal(TRIP_DAYS.length,w.days);
- assert.deepEqual(w.stops.map(s=>s.key),['dallas','waco','fortworth','mountvernon','memphis','nashville']);
+ assert.deepEqual(w.stops.map(s=>s.key),['dallas','wildcatter','fortworth','mountvernon','memphis','nashville']);
  assert.deepEqual(DALLAS_TRIP.airports,['Dallas/Fort Worth (DFW)','Nashville (BNA)']);
 });

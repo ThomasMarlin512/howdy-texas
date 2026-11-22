@@ -1,12 +1,7 @@
+import {TRIP_PHOTOS} from './trip-photos.js';
 export const PHOTOS={
-  "mountvernon": {
-  "label": "Mount Vernon · Franklin County Courthouse",
-  "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Mount_Vernon_May_2018_17_(Franklin_County_Courthouse).jpg?width=960",
-  "author": "Michael Barera",
-  "source": "https://commons.wikimedia.org/wiki/File:Mount_Vernon_May_2018_17_(Franklin_County_Courthouse).jpg",
-  "license": "CC BY-SA 4.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
-},
+  wildcatter: TRIP_PHOTOS.brazos,
+  mountvernon: TRIP_PHOTOS.pines,
   "nashville": {
     "label": "Nashville · Broadway",
     "url": "https://images.unsplash.com/photo-1588897159261-328f3f53715f?auto=format&fit=crop&w=1200&q=80",
@@ -39,14 +34,7 @@ export const PHOTOS={
     "license": "Unsplash",
     "licenseUrl": "https://unsplash.com/license"
   },
-  "fortworth": {
-    "label": "Fort Worth · Stockyards",
-    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Fort_Worth_Stockyards_June_2016_14_%28Exchange_Avenue%29.jpg/1280px-Fort_Worth_Stockyards_June_2016_14_%28Exchange_Avenue%29.jpg",
-    "author": "Michael Barera",
-    "source": "https://commons.wikimedia.org/wiki/File:Fort_Worth_Stockyards_June_2016_14_(Exchange_Avenue).jpg",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
-  },
+  fortworth: TRIP_PHOTOS.fortworth,
   "waco": {
     "label": "Waco · Suspension Bridge",
     "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Waco_Suspension_Bridge.jpg/1280px-Waco_Suspension_Bridge.jpg",
@@ -140,10 +128,10 @@ export const IDEAS=[
   {
     "id": "destination-mountvernon",
     "kind": "destination",
-    "title": "Mount Vernon",
-    "location": "Mount Vernon",
+    "title": "Deer Lake Cabins",
+    "location": "Deer Lake bei Mount Vernon",
     "region": "Texas",
-    "description": "Ranchwege im Geländefahrzeug und ein geführter Geburtstagsausritt für vier.",
+    "description": "25.–27. April · Zwei Nächte am Deer Lake. Am Geburtstag zu viert im UTV durch die Piney Woods, dann Kajak und BBQ am See.",
     "tagline": "Ranchleben in Osttexas",
     "url": "https://deerlakecabins.com/",
     "photo_key": "mountvernon",
@@ -154,12 +142,12 @@ export const IDEAS=[
   {
     "id": "hotel-mountvernon",
     "kind": "hotel",
-    "title": "Deer Lake Cabins Ranch Resort",
+    "title": "Deer Lake · Kangaroo Corner",
     "location": "Mount Vernon",
     "region": "Texas",
-    "description": "Zwei Nächte vom 25. bis 27. April. Cabin mit Küche, zwei Schlafzimmern und zwei Bädern anfragen. Verfügbarkeit, Anfängerausritt und veganes Essen sind offen.",
+    "description": "25.–27. April. Ganzes Haus mit zwei Schlafzimmern mit je eigenem Bad, privatem Steg und Feuerstelle. Listenpreis 425 US-$ pro Nacht, bei zwei Nächten rund 213 US-$ pro Person vor möglichen Steuern und Gebühren. Verfügbarkeit offen.",
     "tagline": "Ranchleben in Osttexas",
-    "url": "https://deerlakecabins.com/",
+    "url": "https://deerlakecabins.com/kc/",
     "photo_key": "mountvernon",
     "author_key": null,
     "archived": false,
@@ -199,7 +187,7 @@ export const IDEAS=[
     "title": "Dallas",
     "location": "Dallas",
     "region": "Texas",
-    "description": "Westernboots anprobieren und am Dienstag im Round-Up Saloon die ersten Schritte tanzen.",
+    "description": "19.–21. April · Mit dem Muscle-Car zum White Rock Lake, abends Line Dance im Round-Up Saloon.",
     "tagline": "Skyline, Stadtleben & Texas-BBQ",
     "url": "https://www.visitdallas.com/",
     "photo_key": "dallas",
@@ -222,15 +210,15 @@ export const IDEAS=[
     "revision": 0
   },
   {
-    "id": "destination-waco",
+    "id": "destination-wildcatter",
     "kind": "destination",
-    "title": "Waco",
-    "location": "Waco",
+    "title": "Wildcatter Ranch",
+    "location": "Wildcatter Ranch bei Graham",
     "region": "Texas",
-    "description": "Wanderung über den Brazos, Texas-Whisky und ein Musikabend nach Spielplan.",
-    "tagline": "Silos, Flusspromenade & Zwischenstopp",
-    "url": "https://www.destinationwaco.org/",
-    "photo_key": "waco",
+    "description": "21.–23. April · Auf dem Weg wandern, in Cabin Suites schlafen und am nächsten Morgen mit den Wranglern ausreiten.",
+    "tagline": "Zwei Nächte bei Graham",
+    "url": "https://wildcatterranch.com/",
+    "photo_key": "wildcatter",
     "author_key": null,
     "archived": false,
     "revision": 0
@@ -288,17 +276,18 @@ export const IDEAS=[
     "revision": 0
   },
   {
-    "id": "hotel-waco",
+    "id": "hotel-wildcatter",
     "kind": "hotel",
-    "title": "Hotel Indigo Waco – Baylor",
-    "location": "Waco",
+    "title": "Wildcatter Ranch · Cabin Suites",
+    "location": "Wildcatter Ranch bei Graham",
     "region": "Texas",
-    "description": "Im Warehouse District in Downtown, nahe Magnolia. Eine Hotelidee, falls Waco mehr als ein kurzer Zwischenstopp werden soll.",
-    "url": "https://www.ihg.com/hotelindigo/hotels/us/en/waco/actin/hoteldetail",
-    "photo_key": "waco",
+    "description": "21.–23. April. Je Paar eine Cabin Suite anfragen. Für zwei Nächte den Gesamtpreis samt Steuern sowie ein veganes Abendessen und Frühstück bestätigen lassen.",
+    "url": "https://wildcatterranch.com/rooms/cabins/",
+    "photo_key": "wildcatter",
     "author_key": null,
     "archived": false,
-    "revision": 0
+    "revision": 0,
+    "tagline": "Zwei Nächte bei Graham"
   }
 ];
 export const TASKS=[["date","Reisezeitraum abstimmen","Termin und gewünschte Reisedauer gemeinsam festlegen."],["flights","Flüge buchen","Gewählte Flüge am 19. und 30. April mit je einem 23-kg-Koffer buchen."],["transport","Fahrzeug auswählen","Großen SUV in Langversion von Dallas nach Nashville für vier Personen und vier Koffer vergleichen. Mietbudget für elf Tage: 1.400–1.950 €."],["stay","Unterkünfte auswählen","Hotelvorschläge vergleichen und Zimmeraufteilung abstimmen."],["budget","Budget gemeinsam festlegen","Gesamtkosten und Reserve pro Person besprechen."],["mustsee","Lieblingsziele auswählen","Ausflüge entlang der Route nach Nashville sammeln und priorisieren."],["documents","Reiseunterlagen prüfen","Gültige Dokumente und aktuelle Einreisevorgaben klären."],["tickets","Buchungen abschließen","Verfügbarkeit und Endpreise vor dem Buchen prüfen."]];
