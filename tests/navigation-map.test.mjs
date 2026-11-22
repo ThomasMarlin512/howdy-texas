@@ -21,7 +21,7 @@ test('each route uses directed road legs in overnight order and preserves exact 
   assert.equal(data.totalMeters,data.legs.reduce((n,l)=>n+l.meters,0));assert.equal(data.totalSeconds,data.legs.reduce((n,l)=>n+l.seconds,0));
  }
  assert.notEqual(ROAD_DATA.legs['austin--sanantonio'].meters,ROAD_DATA.legs['sanantonio--austin'].meters);
- const incomplete={...ROAD_DATA,legs:{...ROAD_DATA.legs}};delete incomplete.legs['fortworth--waco'];assert.throws(()=>routeMapData(ROUTES[0],incomplete));
+ const incomplete={...ROAD_DATA,legs:{...ROAD_DATA.legs}};delete incomplete.legs['dallas--waco'];assert.throws(()=>routeMapData(ROUTES[0],incomplete));
 });
 test('road coordinates use longitude first and stay near the intended cities',()=>{
  const near=(a,b)=>Math.hypot((a[0]-b[0])*90,(a[1]-b[1])*111);
@@ -36,7 +36,7 @@ test('road coordinates use longitude first and stay near the intended cities',()
 test('long drive warnings use actual duration rather than rounded display',()=>{
  assert.deepEqual(ROUTES.map(r=>routeMapData(r).longDrives),[1,0,0,1,2]);
  assert.equal(routeMapData(ROUTES[3]).legs[0].longDrive,false);
- const modified=structuredClone(ROAD_DATA),first=modified.legs['fortworth--waco'];first.seconds=LONG_DRIVE_SECONDS;
+ const modified=structuredClone(ROAD_DATA),first=modified.legs['dallas--waco'];first.seconds=LONG_DRIVE_SECONDS;
  assert.equal(routeMapData(ROUTES[0],modified).legs[0].longDrive,false);
  first.seconds++;assert.equal(routeMapData(ROUTES[0],modified).legs[0].longDrive,true);
  assert.equal(durationLabel(3.91*3600),'ca. 4 Std.');assert.equal(durationLabel(5.62*3600),'ca. 5 Std. 45 Min.');

@@ -1,4 +1,12 @@
 export const PHOTOS={
+  "mountvernon": {
+  "label": "Mount Vernon · Franklin County Courthouse",
+  "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Mount_Vernon_May_2018_17_(Franklin_County_Courthouse).jpg?width=960",
+  "author": "Michael Barera",
+  "source": "https://commons.wikimedia.org/wiki/File:Mount_Vernon_May_2018_17_(Franklin_County_Courthouse).jpg",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+},
   "nashville": {
     "label": "Nashville · Broadway",
     "url": "https://images.unsplash.com/photo-1588897159261-328f3f53715f?auto=format&fit=crop&w=1200&q=80",
@@ -129,6 +137,34 @@ export const PHOTOS={
   }
 };
 export const IDEAS=[
+{
+  "id": "destination-mountvernon",
+  "kind": "destination",
+  "title": "Mount Vernon",
+  "location": "Mount Vernon",
+  "region": "Texas",
+  "description": "Ranchaufenthalt in Osttexas mit geführtem Ausritt und einem freien Geburtstag am See.",
+  "tagline": "Ranchleben in Osttexas",
+  "url": "https://deerlakecabins.com/",
+  "photo_key": "mountvernon",
+  "author_key": null,
+  "archived": false,
+  "revision": 0
+},
+{
+  "id": "hotel-mountvernon",
+  "kind": "hotel",
+  "title": "Deer Lake Cabins Ranch Resort",
+  "location": "Mount Vernon",
+  "region": "Texas",
+  "description": "Zwei Nächte vom 25. bis 27. April. Cabin mit Küche, zwei Schlafzimmern und zwei Bädern anfragen. Verfügbarkeit, Anfängerausritt und veganes Essen sind offen.",
+  "tagline": "Ranchleben in Osttexas",
+  "url": "https://deerlakecabins.com/",
+  "photo_key": "mountvernon",
+  "author_key": null,
+  "archived": false,
+  "revision": 0
+},
   {
     "id": "destination-nashville",
     "kind": "destination",
@@ -503,5 +539,5 @@ export const IDEAS=[
     "revision": 0
   }
 ];
-export const TASKS=[["date","Reisezeitraum abstimmen","Termin und gewünschte Reisedauer gemeinsam festlegen."],["flights","Flugverbindungen vergleichen","Verbindung Zürich–Dallas über Frankfurt und zurück über Chicago inklusive Standardkoffer prüfen."],["transport","Fahrzeug auswählen","Großen SUV in Langversion ab/bis DFW für vier Personen und vier Koffer vergleichen. Mietbudget für zehn Tage: 1.200–1.400 €."],["stay","Unterkünfte auswählen","Hotelvorschläge vergleichen und Zimmeraufteilung abstimmen."],["budget","Budget gemeinsam festlegen","Gesamtkosten und Reserve pro Person besprechen."],["mustsee","Lieblingsziele auswählen","Ausflüge entlang der Dallas-Runde sammeln und priorisieren."],["documents","Reiseunterlagen prüfen","Gültige Dokumente und aktuelle Einreisevorgaben klären."],["tickets","Buchungen abschließen","Verfügbarkeit und Endpreise vor dem Buchen prüfen."]];
+export const TASKS=[["date","Reisezeitraum abstimmen","Termin und gewünschte Reisedauer gemeinsam festlegen."],["flights","Flüge buchen","Gewählte Flüge am 19. und 30. April mit je einem 23-kg-Koffer buchen."],["transport","Fahrzeug auswählen","Großen SUV in Langversion von Dallas nach Nashville für vier Personen und vier Koffer vergleichen. Mietbudget für elf Tage: 1.400–1.950 €."],["stay","Unterkünfte auswählen","Hotelvorschläge vergleichen und Zimmeraufteilung abstimmen."],["budget","Budget gemeinsam festlegen","Gesamtkosten und Reserve pro Person besprechen."],["mustsee","Lieblingsziele auswählen","Ausflüge entlang der Route nach Nashville sammeln und priorisieren."],["documents","Reiseunterlagen prüfen","Gültige Dokumente und aktuelle Einreisevorgaben klären."],["tickets","Buchungen abschließen","Verfügbarkeit und Endpreise vor dem Buchen prüfen."]];
 export const BUDGET_KEYS=['flight','stay','car','road','food','fun','extra'];

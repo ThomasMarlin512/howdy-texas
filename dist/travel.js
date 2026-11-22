@@ -27,7 +27,7 @@ export function createTravelHub({client,context,ideas,toast,openLogin,onChange})
   return '<div class="idea-ballot">'+(related.length?'<p class="booking-status">'+(related.some(b=>b.status==='booked')?'Gebucht':'Eingeplant')+' · <a href="#reiseplan">Im Reiseplan ansehen</a></p>':'')+voteControls('idea',i.id,ballots,'idea_id')+'<button class="quiet" data-book-idea="'+esc(i.id)+'">In den Reiseplan aufnehmen +</button></div>';
  }
  function confirmed(){return dates.find(d=>d.id===settings?.confirmed_option);}
- function confirmedLabel(){const d=confirmed();return d?'Termin aus der Gruppenabstimmung: '+day(d.start_date)+' – '+day(d.end_date)+' · '+validateDates(d.start_date,d.end_date).days+' Tage inklusive Heimkehr.':'Gewählte Reise: 20. April bis 1. Mai 2027.';}
+ function confirmedLabel(){const d=confirmed();return d?'Termin aus der Gruppenabstimmung: '+day(d.start_date)+' – '+day(d.end_date)+' · '+validateDates(d.start_date,d.end_date).days+' Tage inklusive Heimkehr.':'Gewählte Reise: 19. April bis 1. Mai 2027.';}
  function bookingCard(b,conflicts=new Set()){
   const attached=documents.filter(d=>d.booking_id===b.id&&d.ready);
   const d=confirmed(),outside=d&&b.start_local&&(b.start_local.slice(0,10)<d.start_date||(b.end_local||b.start_local).slice(0,10)>d.end_date);

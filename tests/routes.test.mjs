@@ -10,7 +10,7 @@ test('ten, twelve and fourteen days include overnight return and homecoming',()=
 });
 test('no departure before the selected window and no trip beyond fourteen days',()=>{
  for(const d of [0,2,15,60,12.5,NaN])assert.throws(()=>travelWindow(d));
- for(const s of ['2027-04-19','2027-04-31','2027-02-30','not-a-date'])assert.throws(()=>travelWindow(14,s));
+ for(const s of ['2027-04-18','2027-04-31','2027-02-30','not-a-date'])assert.throws(()=>travelWindow(14,s));
 });
 test('all routes have continuous stays, exact nights, real destination links and a final flight day',()=>{
  for(const r of ROUTES){
@@ -28,8 +28,8 @@ test('all routes have continuous stays, exact nights, real destination links and
 test('Dallas trip covers every day from departure to homecoming',()=>{
  const w=routeSchedule(DALLAS_TRIP);
  assert.equal(ROUTES[0],DALLAS_TRIP);
- assert.deepEqual([w.start,w.departUS,w.home,w.nights],['2027-04-20','2027-04-30','2027-05-01',10]);
+ assert.deepEqual([w.start,w.departUS,w.home,w.nights],['2027-04-19','2027-04-30','2027-05-01',11]);
  assert.equal(TRIP_DAYS.length,w.days);
- assert.deepEqual(w.stops.map(s=>s.key),['fortworth','waco','austin','sanantonio','hillcountry','dallas']);
- assert.equal(DALLAS_TRIP.airports[0],DALLAS_TRIP.airports[1]);
+ assert.deepEqual(w.stops.map(s=>s.key),['dallas','waco','fortworth','mountvernon','memphis','nashville']);
+ assert.deepEqual(DALLAS_TRIP.airports,['Dallas/Fort Worth (DFW)','Nashville (BNA)']);
 });
