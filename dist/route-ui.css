@@ -44,3 +44,7 @@
 .trip-days p { margin:.55rem 0; }
 .trip-days small { font-weight:600; }
 .travel-table tfoot { font-weight:bold; }
+
+.trip-days li { border:1px solid #d6c1a0; border-top:4px double #915033; background:#fff9ed; }
+.trip-days time { display:block; margin-bottom:.4rem; font-size:.8rem; font-weight:700; letter-spacing:.06em; color:#854526; }
+.trip-days strong { display:block; font-family:Georgia,serif; font-size:1.2rem; line-height:1.25; }

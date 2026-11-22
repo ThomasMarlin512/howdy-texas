@@ -1,4 +1,4 @@
-import {ROUTES} from './routes.js';
+import {DALLAS_TRIP as selected} from './routes.js';
 import {ROAD_DATA} from './road-data.js';
 import {routeMapData,distanceLabel,durationLabel,googleLegURL} from './route-map-core.js';
 import {escapeHTML as esc} from './core.js';
@@ -15,11 +15,11 @@ function leaflet(){
  return leafletPromise;
 }
 export function createRouteExplorer(){
- let selected=ROUTES[0],data=routeMapData(selected),map=null,layer=null,legLayers=[],markers=[],loading=false,activeLeg=null,activeStop=null,tileErrors=0;
+ const data=routeMapData(selected);
+ let map=null,layer=null,legLayers=[],markers=[],loading=false,activeLeg=null,activeStop=null,tileErrors=0;
  const latLng=coordinate=>[coordinate[1],coordinate[0]];
  const live=message=>$('#route-map-status').textContent=message;
  function render(){
-  data=routeMapData(selected);$('#map-route-select').value=selected.id;
   $('#route-map-title').textContent=selected.title;
   $('#route-map-summary').innerHTML='<div><span>Straßenstrecke</span><strong>'+distanceLabel(data.totalMeters)+'</strong></div><div><span>Reine Fahrzeit</span><strong>'+durationLabel(data.totalSeconds)+'</strong></div><div><span>Übernachtungen</span><strong>'+data.nights+' Nächte · '+data.stops.length+' Orte</strong></div><div><span>Fahrten über 4 Std.</span><strong>'+data.longDrives+'</strong></div>';
   $('#route-map-dates').textContent=fmt(data.start)+' – '+fmt(data.home)+'2027 · '+data.days+' Kalendertage inklusive Heimkehr';
@@ -75,17 +75,13 @@ export function createRouteExplorer(){
   }catch(e){if(map){map.remove();map=null;layer=null;}live(e.message+' Alle Streckendaten stehen weiterhin unterhalb.');$('#route-map-retry').hidden=false;}
   finally{loading=false;}
  }
- function choose(id){const r=ROUTES.find(r=>r.id===id);if(!r)return;selected=r;activeLeg=null;activeStop=null;render();if(!map&&!loading)activate();}
- $('#map-route-select').innerHTML=ROUTES.map(r=>'<option value="'+r.id+'">'+esc(r.title)+' · '+r.days+' Tage</option>').join('');
- $('#map-route-select').addEventListener('change',e=>choose(e.target.value));
  $('#route-map-reset').addEventListener('click',fit);
  $('#route-map-retry').addEventListener('click',activate);
  $('#map-gesture').addEventListener('click',e=>{if(!map)return;const enable=!map.dragging.enabled();enable?map.dragging.enable():map.dragging.disable();e.currentTarget.setAttribute('aria-pressed',String(enable));e.currentTarget.textContent=enable?'Verschieben sperren':'Karte verschieben';$('#route-map').classList.toggle('map-can-drag',enable);});
  document.addEventListener('click',e=>{
-  const b=e.target.closest('[data-map-stop],[data-map-leg],[data-map-route]');if(!b)return;
+  const b=e.target.closest('[data-map-stop],[data-map-leg]');if(!b)return;
   if(b.hasAttribute('data-map-stop'))selectStop(Number(b.dataset.mapStop));
   else if(b.hasAttribute('data-map-leg'))selectLeg(Number(b.dataset.mapLeg));
-  else{choose(b.dataset.mapRoute);$('#route-explorer').scrollIntoView({behavior:'instant',block:'start'});$('#map-route-select').focus({preventScroll:true});}
  });
  render();return {activate};
 }

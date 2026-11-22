@@ -1,14 +1,14 @@
 import {IDEAS,PHOTOS,TASKS,BUDGET_KEYS} from './data.js';
-import {ROUTES,DALLAS_TRIP,TRIP_DAYS,addDays,routeSchedule} from './routes.js';
+import {DALLAS_TRIP,TRIP_DAYS,addDays,routeSchedule} from './routes.js';
 import {createTravelHub} from './travel.js';
 import {resolveView,updateNavigation} from './navigation.js';
 import {createRouteExplorer} from './route-map.js';
-import {routeMapData,distanceLabel,durationLabel} from './route-map-core.js';
 import {config} from './config.js';
 import {escapeHTML as esc,cleanState,totalBudget,maps,nextRevision,safeURL,validateIdea} from './core.js';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const euro=new Intl.NumberFormat('de-AT',{style:'currency',currency:'EUR'});
 const df=new Intl.DateTimeFormat('de-AT',{day:'2-digit',month:'2-digit',year:'numeric'});
+const catalogIds=new Set(IDEAS.map(i=>i.id));
 let client,context=null,plan=cleanState({}),revision=null,ideas=IDEAS.map(i=>({...i})),votes=[],filter='route',dirty=false,saving=false,toastTimer,editing=null,ideaSaving=false,editorDirty=false,pendingKind=null;
 const hub=createTravelHub({client:()=>client,context:()=>context,ideas:()=>ideas,toast,openLogin,onChange:()=>renderCatalog()});
 const routeExplorer=createRouteExplorer();
@@ -30,14 +30,11 @@ function renderRoutes(){
   const day=addDays(schedule.start,index);
   const overnight=schedule.stops.find(stop=>stop.arrival<=day&&day<stop.departure);
   const bed=overnight?'Übernachtung in '+destination(overnight.key).location.split(' & ')[0]:day===schedule.departUS?'Nachtflug nach Zürich':'Heimkehr';
-  return `<li><strong>${fmt(day)} · ${esc(title)}</strong><p>${esc(note)}</p><small>${esc(bed)}</small>${url?' · <a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Vor dem Besuch ↗</a>':''}</li>`;
+  return `<li><time datetime="${day}">${fmt(day)}</time><strong>${esc(title)}</strong><p>${esc(note)}</p><small>${esc(bed)}</small>${url?' · <a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Vor dem Besuch ↗</a>':''}</li>`;
  }).join('');
  $$('[data-trip-days]').forEach(el=>el.innerHTML=dayList);
- const cards=ROUTES.map(r=>{
-  const w=routeSchedule(r),p=PHOTOS[r.photo],drive=routeMapData(r);
-  return '<article class="route-card"><div class="route-cover"><img src="'+esc(p.url)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"><div><span class="idea-badge">'+r.days+' Tage · '+w.nights+' Nächte</span><h3>'+esc(r.title)+'</h3><p>'+esc(r.tag)+'</p></div></div><div class="route-body"><p class="route-dates">'+fmt(w.start)+' – '+fmt(w.home)+'</p><p>'+esc(r.intro)+'</p><p class="route-path">'+w.stops.map(s=>esc(destination(s.key).title)).join(' → ')+'</p><p class="muted">'+esc(r.pace)+'</p><details><summary>Etappen & Übernachtungen ansehen</summary><ol class="route-stops">'+w.stops.map(s=>'<li><button class="quiet" data-detail="destination-'+esc(s.key)+'">'+esc(destination(s.key).title)+' →</button><span>'+fmt(s.arrival)+' – '+fmt(s.departure)+' · '+s.nights+' '+(s.nights===1?'Nacht':'Nächte')+'</span><p>'+esc(s.note)+'</p></li>').join('')+'</ol><p><strong>Optionale Zwischenstopps:</strong></p><div class="route-extras">'+r.optional.map(key=>'<button class="quiet" data-detail="destination-'+esc(key)+'">'+esc(destination(key).title)+' →</button>').join('')+'</div><p>'+esc(r.note)+'</p></details><p class="route-airports"><strong>Flughäfen</strong> · Zürich → '+esc(r.airports[0])+' / zurück ab '+esc(r.airports[1])+'.<br>US-Abflug '+fmt(w.departUS)+', Heimkehr '+fmt(w.home)+'.</p><a href="#hotels">Passende Unterkünfte vergleichen →</a></div></article>';
- });
- $('#route-options').innerHTML=cards[0]+'<details class="panel"><summary>Frühere Routenvorschläge ansehen</summary>'+cards.slice(1).join('')+'</details>';
+ const r=DALLAS_TRIP,w=schedule,p=PHOTOS[r.photo];
+ $('#route-options').innerHTML='<article class="route-card"><div class="route-cover"><img src="'+esc(p.url)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"><div><span class="idea-badge">'+r.days+' Tage · '+w.nights+' Nächte</span><h3>'+esc(r.title)+'</h3><p>'+esc(r.tag)+'</p></div></div><div class="route-body"><p class="route-dates">'+fmt(w.start)+' – '+fmt(w.home)+'</p><p>'+esc(r.intro)+'</p><p class="route-path">'+w.stops.map(s=>esc(destination(s.key).title)).join(' → ')+'</p><p class="muted">'+esc(r.pace)+'</p><details><summary>Etappen & Übernachtungen ansehen</summary><ol class="route-stops">'+w.stops.map(s=>'<li><button class="quiet" data-detail="destination-'+esc(s.key)+'">'+esc(destination(s.key).title)+' →</button><span>'+fmt(s.arrival)+' – '+fmt(s.departure)+' · '+s.nights+' '+(s.nights===1?'Nacht':'Nächte')+'</span><p>'+esc(s.note)+'</p></li>').join('')+'</ol><p>'+esc(r.note)+'</p></details><p class="route-airports"><strong>Flughäfen</strong> · Zürich → '+esc(r.airports[0])+' / zurück ab '+esc(r.airports[1])+'.<br>US-Abflug '+fmt(w.departUS)+', Heimkehr '+fmt(w.home)+'.</p><a href="#hotels">Passende Unterkünfte vergleichen →</a></div></article>';
 }
 
 const routeOrder=[...DALLAS_TRIP.stops.map(([key])=>key),...DALLAS_TRIP.optional];
@@ -75,7 +72,7 @@ function renderGroup(){if(!context)return;$('#people').innerHTML=context.people.
 }
 function clearPrivate(){context=null;hub.clear();votes=[];ideas=IDEAS.map(i=>({...i}));revision=null;plan=cleanState({});dirty=false;editorDirty=false;editing=null;for(const id of ['idea-dialog','idea-detail-dialog'])if($('#'+id).open)$('#'+id).close();$$('.protected').forEach(x=>x.hidden=true);$$('.private-gate').forEach(x=>x.hidden=false);$('#whoami').textContent='';$('#account-button').textContent='Anmelden →';$('#people').replaceChildren();$('#group-votes').replaceChildren();$('#withdrawn').replaceChildren();renderPlan();renderCatalog();}
 async function allRows(table,columns){let rows=[];for(let offset=0;;offset+=1000){const r=await client.from(table).select(columns).order(table==='howdy_ideas'?'id':'idea_id').range(offset,offset+999);if(r.error)throw Error('Die gemeinsame Ideensammlung konnte nicht geladen werden.');rows.push(...r.data);if(r.data.length<1000)return rows;}}
-async function loadCatalog(){if(!context)return;const current=context;const [items,marks]=await Promise.all([allRows('howdy_ideas','id,kind,title,location,region,description,url,photo_key,author_key,archived,revision,created_at'),allRows('howdy_idea_votes','member_key,idea_id')]);if(context!==current)return;ideas=items;votes=marks;renderCatalog();}
+async function loadCatalog(){if(!context)return;const current=context;const [items,marks]=await Promise.all([allRows('howdy_ideas','id,kind,title,location,region,description,url,photo_key,author_key,archived,revision,created_at'),allRows('howdy_idea_votes','member_key,idea_id')]);if(context!==current)return;ideas=items.filter(i=>i.author_key||catalogIds.has(i.id));votes=marks;renderCatalog();}
 async function loadPlan(){const current=context;const {data,error}=await client.from('howdy_plan').select('data,revision,updated_at').eq('id',1).single();if(error||!data)throw Error('Planung konnte nicht geladen werden. Bitte erneut versuchen.');if(context!==current)return;plan=cleanState(data.data);revision=data.revision;renderPlan();$('#sync-status').textContent='Gemeinsamer Stand · '+new Date(data.updated_at).toLocaleString('de-AT');}
 async function enter(){const result=await client.rpc('howdy_context');if(result.error)throw Error('Gruppenbereich momentan nicht erreichbar.');if(!result.data?.me)throw Error('Dieser Zugang gehört nicht zur Texas-Reisegruppe.');context=result.data;try{await Promise.all([loadPlan(),loadCatalog(),hub.load()]);}catch(e){clearPrivate();throw e;}$$('.protected').forEach(x=>x.hidden=false);$$('.private-gate').forEach(x=>x.hidden=true);$('#whoami').textContent=context.name;$('#account-button').textContent='Abmelden';renderGroup();}
 async function invoke(body){const r=await client.functions.invoke(config.functionName,{body});if(r.error){let msg='Dienst momentan nicht erreichbar.';try{msg=(await r.error.context.json()).error||msg;}catch{}throw Error(msg);}if(!r.data?.ok)throw Error(r.data?.error||'Anmeldung fehlgeschlagen.');return r.data;}

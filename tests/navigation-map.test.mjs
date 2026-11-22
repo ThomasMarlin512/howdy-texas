@@ -34,8 +34,8 @@ test('road coordinates use longitude first and stay near the intended cities',()
  }
 });
 test('long drive warnings use actual duration rather than rounded display',()=>{
- assert.deepEqual(ROUTES.map(r=>routeMapData(r).longDrives),[1,0,0,1,2]);
- assert.equal(routeMapData(ROUTES[3]).legs[0].longDrive,false);
+ assert.deepEqual(ROUTES.map(r=>routeMapData(r).longDrives),[1]);
+ assert.equal(routeMapData(ROUTES[0]).legs[0].longDrive,false);
  const modified=structuredClone(ROAD_DATA),first=modified.legs['dallas--waco'];first.seconds=LONG_DRIVE_SECONDS;
  assert.equal(routeMapData(ROUTES[0],modified).legs[0].longDrive,false);
  first.seconds++;assert.equal(routeMapData(ROUTES[0],modified).legs[0].longDrive,true);
