@@ -4,30 +4,30 @@ export const DALLAS_TRIP={
   id:'dallas-runde', title:'Unsere Texas-Runde ab Dallas', days:12, start:TRIP.earliestStart, checkedAt:TRIP.checkedAt,
   photo:'fortworth', tag:'Gewählte Reise · 20. April bis 1. Mai 2027',
   airports:['Dallas/Fort Worth (DFW)','Dallas/Fort Worth (DFW)'],
-  intro:'Zehn Nächte zwischen den Stockyards und dem Hill Country. Den SUV übernehmen wir bei der Ankunft in Dallas/Fort Worth und geben ihn am selben Flughafen zurück.',
+  intro:'Zehn Nächte zwischen den Stockyards und dem Hill Country. Den großen SUV übernehmen wir bei der Ankunft in Dallas/Fort Worth und geben ihn am selben Flughafen zurück.',
   pace:'Die längste Fahrt liegt am Vortag des Rückflugs. Die letzte Nacht verbringen wir in Dallas.',
   stops:[
     ['fortworth',2,'20.–22. April · Nach dem Flug in Ruhe ankommen. Der volle zweite Tag gehört den Stockyards.'],
-    ['waco',1,'22.–23. April · Magnolia Silos und ein Spaziergang über die Suspension Bridge.'],
+    ['waco',1,'22.–23. April · Auf der Anfahrt das Waco Mammoth National Monument besuchen. Danach die Silos oder die Suspension Bridge zu Fuß erkunden.'],
     ['austin',2,'23.–25. April · South Congress, Lady Bird Lake und ein Abend mit Live-Musik.'],
-    ['sanantonio',2,'25.–27. April · Auf der Anreise Pause in Gruene. In San Antonio bleiben Zeit für den River Walk und Mission San José.'],
+    ['sanantonio',2,'25.–27. April · Auf der Anreise Pause in Gruene. In San Antonio bleiben Zeit für den River Walk und die Missionen San José und San Juan.'],
     ['hillcountry',2,'27.–29. April · Fredericksburg als Basis für Luckenbach und einen Ausflug zum Enchanted Rock.'],
     ['dallas',1,'29.–30. April · Rückfahrt aus dem Hill Country. Hotel mit guter Anbindung an DFW wählen.']
   ],
   optional:['gruene'], note:'Für Konzerte, Eintrittskarten und Unterkünfte prüft die Gruppe Termine und Verfügbarkeit.'
 };
 export const TRIP_DAYS=[
-  ['Ankunft in Texas','14:15 Uhr Landung in Dallas/Fort Worth. Nach Einreise und Gepäckausgabe den SUV übernehmen und nach Fort Worth fahren. Für den ersten Abend nur ein gemeinsames Essen vorsehen.'],
+  ['Ankunft in Texas','Mit Lufthansa über Frankfurt nach Dallas/Fort Worth, Landung um 14:15 Uhr. Nach Einreise und Gepäckausgabe mit dem Shuttle zum Rental Car Center, den großen SUV abholen und nach Fort Worth fahren. Für den Abend ist ein gemeinsames Essen geplant.'],
   ['Fort Worth Stockyards','Die Exchange Avenue und die historischen Viehhöfe zu Fuß erkunden. Wer den Viehtrieb sehen möchte, schaut vorher in den Tageskalender.','https://www.fortworthstockyards.org/'],
-  ['Fort Worth → Waco','Nach dem Einchecken zu den Magnolia Silos. Am späten Nachmittag über die Suspension Bridge am Brazos River spazieren.','https://www.destinationwaco.org/'],
+  ['Fort Worth → Waco','Auf der Anfahrt von Fort Worth am Waco Mammoth National Monument halten. Die Fossilien im Grabungshaus sind bei einer Führung zu sehen. Am Nachmittag je nach Zeit Magnolia Silos oder ein Spaziergang über die Suspension Bridge.','https://www.nps.gov/waco/planyourvisit/index.htm'],
   ['Waco → Austin','Nach Austin fahren, auf South Congress bummeln und abends in einen Musikclub einkehren.','https://www.austintexas.org/'],
-  ['Ein ganzer Tag in Austin','Vormittags das Texas Capitol ansehen, nachmittags ein Stück am Lady Bird Lake gehen. Zeit für Foodtrucks und einen freien Abend lassen.','https://tspb.texas.gov/plan/tours/tours.html'],
+  ['Ein ganzer Tag in Austin','Den SUV am Hotel stehen lassen. Vormittags das Texas Capitol ansehen, nachmittags zu Fuß am Lady Bird Lake entlang. Zeit für Foodtrucks und einen freien Abend lassen.','https://tspb.texas.gov/plan/tours/tours.html'],
   ['Über Gruene nach San Antonio','In Gruene Mittagspause machen und bei der Gruene Hall vorbeischauen. Nach der Weiterfahrt am River Walk essen.','https://www.gruenetexas.com/'],
-  ['San Antonios Missionen','Vormittags Mission San José besuchen. Nachmittags je nach Interesse das Alamo besichtigen oder am River Walk bleiben.','https://www.nps.gov/saan/planyourvisit/basicinfo.htm'],
+  ['San Antonios Missionen','Vormittags zum Besucherzentrum der Mission San José fahren, danach weiter zur Mission San Juan. Beide haben Besucherparkplätze. Für den Abend den Wagen am Hotel lassen und am River Walk essen.','https://www.nps.gov/saan/planyourvisit/directions.htm'],
   ['San Antonio → Fredericksburg','In Fredericksburg einchecken und die Main Street erkunden. Luckenbach ist unser Vorschlag für den Country-Abend. Das Musikprogramm vorab prüfen.','https://www.luckenbachtexas.com/'],
-  ['Enchanted Rock oder Fredericksburg','Bei gutem Wetter am Vormittag zum Enchanted Rock fahren. Tagespass vorab prüfen. Wer einen ruhigeren Tag möchte, bleibt in Fredericksburg.','https://tpwd.texas.gov/state-parks/enchanted-rock'],
+  ['Enchanted Rock oder Fredericksburg','Morgens auf der Ranch Road 965 zum Enchanted Rock fahren. Einen Tagespass für vier vorab prüfen und vor Ort eine Wanderung nach Wetter und Kondition wählen. Am Nachmittag zurück nach Fredericksburg zur Main Street.','https://tpwd.texas.gov/state-parks/enchanted-rock'],
   ['Fredericksburg → Dallas','Rund 420 km und fünf Stunden reine Fahrzeit. Pause einplanen, in Dallas einchecken und gemeinsam BBQ essen.'],
-  ['Mietwagen zurückgeben und heimfliegen','Früh zum Mietwagenzentrum DFW fahren. Der Flug nach Chicago startet um 12:21 Uhr, der Anschluss nach Zürich um 15:50 Uhr Ortszeit.'],
+  ['Mietwagen zurückgeben und heimfliegen','Als Ziel für die Rückgabe 08:30 Uhr am DFW Rental Car Center, 2424 E. 38th Street, einplanen. Anschließend mit dem Shuttle zum Terminal. United Airlines startet um 12:21 Uhr nach Chicago und um 15:50 Uhr Ortszeit weiter nach Zürich.','https://www.dfwairport.com/explore/transportation/rentalcars/'],
   ['Zurück in Vorarlberg','07:45 Uhr Landung in Zürich. Nach Gepäckausgabe gemeinsame Heimfahrt nach Bürs oder Nenzing.']
 ];
 export const ROUTES=[DALLAS_TRIP,
