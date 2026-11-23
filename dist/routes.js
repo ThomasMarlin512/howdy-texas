@@ -4,7 +4,7 @@ export const DALLAS_TRIP={
   id:'dallas-nashville', title:'Von Dallas nach Nashville', days:13, start:TRIP.earliestStart, checkedAt:TRIP.checkedAt,
   photo:'fortworth', tag:'Routenvorschlag · 19. April bis 1. Mai 2027',
   airports:['Dallas/Fort Worth (DFW)','Nashville (BNA)'],
-  intro:'Mit einem großen SUV von Texas nach Tennessee. Die Flüge stehen für die Planung fest. Unterkünfte, Mietwagen und Ausritte sind Vorschläge.',
+  intro:'Mit einem großen SUV von Texas nach Tennessee. Hin- und Rückflug sind gebucht. Unterkünfte, Mietwagen und Ausritte sind Vorschläge.',
   pace:'Am 27. April liegt die längste Etappe. Am Geburtstag steht der SUV auf der Ranch.',
   stops:[
   ["dallas", 2, "19.–21. April · Mit dem Muscle-Car zum White Rock Lake, abends Line Dance im Round-Up Saloon."],
