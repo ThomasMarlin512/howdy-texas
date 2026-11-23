@@ -187,7 +187,7 @@ export const IDEAS=[
     "title": "Dallas",
     "location": "Dallas",
     "region": "Texas",
-    "description": "19.–21. April · Mit dem Muscle-Car zum White Rock Lake, abends Line Dance im Round-Up Saloon.",
+    "description": "19.–21. April · Zum White Rock Lake, abends Line Dance im Round-Up Saloon.",
     "tagline": "Skyline, Stadtleben & Texas-BBQ",
     "url": "https://www.visitdallas.com/",
     "photo_key": "dallas",
@@ -290,5 +290,5 @@ export const IDEAS=[
     "tagline": "Zwei Nächte bei Graham"
   }
 ];
-export const TASKS=[["date","Reisezeitraum abstimmen","Termin und gewünschte Reisedauer gemeinsam festlegen."],["flights","Flugunterlagen ergänzen","Beide Flüge sind gebucht. Rückflugdetails und bezahlten Gesamtpreis ergänzen."],["transport","Fahrzeug auswählen","Großen SUV in Langversion von Dallas nach Nashville für vier Personen und vier Koffer vergleichen. Mietbudget für elf Tage: 1.400–1.950 €."],["stay","Unterkünfte auswählen","Hotelvorschläge vergleichen und Zimmeraufteilung abstimmen."],["budget","Budget gemeinsam festlegen","Gesamtkosten und Reserve pro Person besprechen."],["mustsee","Lieblingsziele auswählen","Ausflüge entlang der Route nach Nashville sammeln und priorisieren."],["documents","Reiseunterlagen prüfen","Gültige Dokumente und aktuelle Einreisevorgaben klären."],["tickets","Buchungen abschließen","Verfügbarkeit und Endpreise vor dem Buchen prüfen."]];
+export const TASKS=[["date","Reisetermine im Kalender eintragen","19. April bis 1. Mai 2027 einschließlich Heimkehr."],["flights","Flugunterlagen ergänzen","Tickets für beide gebuchten Flüge ablegen und den bezahlten Hinflugpreis ergänzen."],["transport","Mietwagen-Voucher ablegen","Alamo ist gebucht. Den Voucher bei den Reiseunterlagen ablegen und den bezahlten Preis ergänzen."],["stay","Unterkünfte auswählen","Hotelvorschläge vergleichen und Zimmeraufteilung abstimmen."],["budget","Budget gemeinsam festlegen","Gesamtkosten und Reserve pro Person besprechen."],["mustsee","Lieblingsziele auswählen","Ausflüge entlang der Route nach Nashville sammeln und priorisieren."],["documents","Reiseunterlagen prüfen","Gültige Dokumente und aktuelle Einreisevorgaben klären."],["tickets","Buchungen abschließen","Verfügbarkeit und Endpreise vor dem Buchen prüfen."]];
 export const BUDGET_KEYS=['flight','stay','car','road','food','fun','extra'];

@@ -4,10 +4,10 @@ export const DALLAS_TRIP={
   id:'dallas-nashville', title:'Von Dallas nach Nashville', days:13, start:TRIP.earliestStart, checkedAt:TRIP.checkedAt,
   photo:'fortworth', tag:'Routenvorschlag · 19. April bis 1. Mai 2027',
   airports:['Dallas/Fort Worth (DFW)','Nashville (BNA)'],
-  intro:'Mit einem großen SUV von Texas nach Tennessee. Hin- und Rückflug sind gebucht. Unterkünfte, Mietwagen und Ausritte sind Vorschläge.',
+  intro:'Mit einem großen SUV von Texas nach Tennessee. Hinflug, Rückflug und der Alamo-SUV sind gebucht. Unterkünfte und Ausritte planen wir gemeinsam.',
   pace:'Am 27. April liegt die längste Etappe. Am Geburtstag steht der SUV auf der Ranch.',
   stops:[
-  ["dallas", 2, "19.–21. April · Mit dem Muscle-Car zum White Rock Lake, abends Line Dance im Round-Up Saloon."],
+  ["dallas", 2, "19.–21. April · Zum White Rock Lake, abends Line Dance im Round-Up Saloon."],
   ["wildcatter", 2, "21.–23. April · Auf dem Weg wandern, in Cabin Suites schlafen und am nächsten Morgen mit den Wranglern ausreiten."],
   ["fortworth", 2, "23.–25. April · Tanzfläche bei Billy Bob’s, dann Stockyards und Samstagabend-Rodeo."],
   ["mountvernon", 2, "25.–27. April · Zwei Nächte am Deer Lake. Am Geburtstag zu viert im UTV durch die Piney Woods, dann Kajak und BBQ am See."],
@@ -17,8 +17,8 @@ export const DALLAS_TRIP={
   optional:[], note:'Die Karte führt zu beiden Ranchzufahrten. Die Wanderung bei Mineral Wells und die Dallas-Rundfahrt kommen zur direkten Straßenstrecke hinzu.'
 };
 export const TRIP_DAYS=[
-  ["Ankunft in Dallas", "British Airways ab Zürich um 10:35 Uhr, via London nach Dallas/Fort Worth um 17:05 Uhr. SUV abholen. Für den ersten Abend nur ein gemeinsames Essen einplanen.", null, "dallas"],
-  ["Mit dem Muscle-Car zum White Rock Lake", "Vormittags einen Viersitzer bei Dallas Exotics in Downtown übernehmen. Über Lakewood zum White Rock Lake fahren, für Picknick und Fotos am See halten. Nachmittags zurück zur selben Station, solange sie geöffnet ist. SUV und Koffer bleiben am Hotel. Abends per Taxi zum Round-Up Saloon für den Anfängertanzkurs. Tagespreis und Modell sind offen.", "https://www.enterprise.com/en/car-rental-locations/us/tx/dallas-exotics-09xl.html", "mustang"],
+  ["Ankunft in Dallas", "British Airways ab Zürich um 10:35 Uhr, via London nach Dallas/Fort Worth um 17:05 Uhr. Um 18:00 Uhr bei Alamo am Flughafen den gebuchten SUV übernehmen (Chevrolet Tahoe oder ähnlich). Für den ersten Abend nur ein gemeinsames Essen einplanen.", null, "dallas"],
+  ["Ausflug zum White Rock Lake", "Über Lakewood zum White Rock Lake fahren und am See zum Picknick halten. Die Muscle-Car-Runde ist ein optionaler Tagesausflug. Abends per Taxi zum Round-Up Saloon für den Anfängertanzkurs.", null, "mustang"],
   ["Durch die Sandsteinfelsen zur Wildcatter Ranch", "Von Dallas mit dem SUV zum Lake Mineral Wells State Park. Vom Ostufer führt der Red Waterfront Trail zu den Felswänden von Penitentiary Hollow. Der Park nennt 1,3 km und 45 Minuten für den einfachen Weg. Mit Rückweg und Fotostopps rund zwei Stunden einplanen. Weiter zu den Cabin Suites bei Graham. Für den Abend im Steakhouse ein veganes Hauptgericht vorab bestätigen lassen.", "https://tpwd.texas.gov/state-parks/lake-mineral-wells/trails-info"],
   ["Longhorns und euer erster Western-Ausritt", "Laut Ranch beginnt die Longhorn-Fütterung um 9 Uhr. Für 11 Uhr den geführten Ausritt im Schritttempo anfragen. Für vier Anfänger passt die einstündige Runde. Listenpreis 85 US-$ pro Person, zusammen 340 US-$ vor Steuern und Trinkgeld. Nachmittags als Option mit dem SUV zum Possum Kingdom Lake. Ausritt und Zeiten für Donnerstag sind noch offen.", "https://wildcatterranch.com/activities/horse-trails/", "brazos"],
   ["Fort Worth · Freitag bei Billy Bob’s Texas", "Vormittags von der Ranch nach Fort Worth. Nachmittags die Stockyards zu Fuß erkunden und den Longhorn-Cattle-Drive ansehen, wenn er stattfindet. Abends zum Two-Step bei Billy Bob’s Texas. Besetzung und Einlass für Freitag beim Veranstalter prüfen.", "https://www.fortworthstockyards.org/business/billy-bobs-texas", "fortworth"],
@@ -28,7 +28,7 @@ export const TRIP_DAYS=[
   ["Memphis · Blues im Rum Boogie Cafe", "Heute liegt die längste Fahretappe vor euch. Für die rund 575 km etwa 6½ Stunden reine Fahrt und zusätzlich Zeit für Mittagessen und Fahrerwechsel einplanen. Nach dem Einchecken zu Fuß zur Beale Street. Im Rum Boogie Cafe gibt es laut Veranstalter jeden Abend Live-Blues.", "https://bealestreet.com/go/rum-boogie-cafe", "memphis"],
   ["Nashville Palace · Country auf der Tanzfläche", "Von Memphis nach Nashville fahren. Im Nashville Palace gibt es mittwochs laut Hausprogramm offene Tanzfläche bis 22 Uhr. Der Line-Dance-Abend ist mittwochs ab 21 Jahren.", "https://www.thefamousnashvillepalace.com/contact"],
   ["Honky-Tonk-Abend am Broadway", "Tagsüber das Ryman Auditorium erkunden. Ab 18 Uhr zu Robert’s Western World: Eintritt ab 21 Jahren und traditionelle Countrymusik. Für den letzten Abend den SUV am Hotel lassen.", "https://nashvillelife.com/Roberts-Western-World/TN", "nashville"],
-  ["Rückflug ab Nashville", "Den SUV gegen 09:30 Uhr am Flughafen BNA zurückgeben. United startet um 13:10 Uhr nach Washington-Dulles. Um 17:35 Uhr geht es weiter nach Zürich."],
+  ["Rückflug ab Nashville", "Um 10:00 Uhr den SUV bei Alamo am Flughafen Nashville (BNA) zurückgeben. United startet um 13:10 Uhr nach Washington-Dulles. Um 17:35 Uhr geht es weiter nach Zürich."],
   ["Heimkehr", "Landung in Zürich um 08:05 Uhr. Nach der Gepäckausgabe gemeinsame Heimfahrt nach Bürs oder Nenzing."]
 ];
 export const ROUTES=[DALLAS_TRIP];
