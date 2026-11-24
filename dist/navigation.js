@@ -3,7 +3,7 @@ export const NAV_GROUPS=[
  {id:'route',label:'Route',href:'routen',views:[['routen','Unsere Route'],['programm','Reiseziele'],['hotels','Hotelideen']]},
  {id:'buchungen',label:'Buchungen',href:'reiseplan',views:[['reiseplan','Reiseplan'],['anreise','Flüge'],['mietwagen','Mietwagen'],['planung','Budget & Aufgaben']]},
  {id:'unterlagen',label:'Unterlagen',href:'unterlagen',views:[['unterlagen','Tickets & Bestätigungen']]},
- {id:'gruppe',label:'Gruppe',href:'gruppe',views:[['gruppe','Unsere Crew'],['termine','Termine'],['fotos','Fotos']]}
+ {id:'gruppe',label:'Gruppe',href:'gruppe',views:[['gruppe','Unsere Crew'],['termine','Reisetermin'],['fotos','Fotos']]}
 ];
 const ALIASES={uebersicht:'reiseinfos',route:'programm',crew:'gruppe',reiseideen:'programm',start:'reiseinfos',buchungen:'reiseplan'};
 export function resolveView(hash){

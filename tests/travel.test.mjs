@@ -52,7 +52,11 @@ test('hub markup contains every static selector, gated page and no public docume
  const html=fs.readFileSync(new URL('../dist/index.html',import.meta.url),'utf8'),js=fs.readFileSync(new URL('../dist/travel.js',import.meta.url),'utf8');
  const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(ids.length,new Set(ids).size);
  for(const [,id] of js.matchAll(/\$\('#([\w-]+)'\)/g))assert.ok(ids.includes(id),'Missing '+id);
- for(const view of ['mietwagen','reiseplan','unterlagen','termine','fotos']){const section=html.match(new RegExp('<section data-view="'+view+'"[\\s\\S]*?(?=<section data-view=|</main>)'))?.[0];assert.ok(section?.includes('class="private-gate"'));assert.ok(section?.includes('class="protected" hidden'));}
+ for(const view of ['mietwagen','reiseplan','unterlagen','fotos']){const section=html.match(new RegExp('<section data-view="'+view+'"[\\s\\S]*?(?=<section data-view=|</main>)'))?.[0];assert.ok(section?.includes('class="private-gate"'));assert.ok(section?.includes('class="protected" hidden'));}
+ const dates=html.match(/<section data-view="termine"[\s\S]*?<\/section>/)[0];
+ assert.match(dates,/19\. April bis <em>1\. Mai 2027/);
+ assert.doesNotMatch(dates,/<form|<button|Terminvorschlag|Abstimmung/);
+ assert.doesNotMatch(js,/howdy_date_options|howdy_date_votes|confirmed_option/);
  assert.ok(!js.includes('getPublicUrl'));assert.ok(js.includes('upsert:false'));assert.ok(js.includes('URL.revokeObjectURL'));
 });
 
